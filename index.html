@@ -1,0 +1,2173 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+	    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-137436721-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-137436721-1');
+</script>
+	
+	
+	
+	<title>atlas.brussels</title>
+	<meta name="description" content="atlas.brussels in an interactive visualization tool to explore the geographical properties of Brussels and its surroundings" />
+	<meta name="author" content="Olivier Finance">
+	
+	
+
+<script src="ATLAS/jquery-3.2.1.js"></script>
+<script src="ATLAS/d3.v4.min.js"></script>
+<script src="ATLAS/sweetalert2.js"></script>
+
+	
+	
+<script src="ATLAS/js/chaquecarte.js"></script>
+
+	
+
+
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Josefin+Slab" as="font" />
+	
+	<link rel="preload" href="ATLAS/images/charte-graphique-atlas-page-explore.png" as="image" />
+	<link rel="preload" href="ATLAS/images/charte-graphique-atlas-page-lien.png" as="image" />
+	<link rel="stylesheet" href="ATLAS/main-css-atlas.css">
+	
+<link rel="icon" type="image/png" href="https://atlas.brussels/wp-content/uploads/2019/01/favicon.png" />	
+
+<!--<script src="ATLAS/queue.js"></script>-->
+
+<!--
+
+
+                                                                                                                                                                           
+                                                                                                                                                                           
+                                                                                                                                                                           
+                                                                                                                                                                           
+                                                                                                                                                                           
+                                                                                                                                                                           
+                                                                                                                                                                           
+                                                                                     `,                                                                                    
+                                                                                   ,;';;;                                                                                  
+                                                                                   ;;;;;;;                                                                                 
+                                                                                  ;;;;;;;;                                                                                 
+                                                                                  ;;;;;;;;                                                                                 
+                                                                              ,`  ';;;;;;;                                                                                 
+                                                                              ,,.,`;;;;;'' ,,                                                                              
+                                                                         `  ,,,,.` ;';;;;  ,,,,                                                                            
+                                                                        ,,.,,,,,,    ''`     `,.,                                                                          
+                                                               ;;;;;;   ..,.,,.,.     ,         ,,,`,  ;;;;;;                                                              
+                                                              ;;;;;;;; `,,,,`        ,,           ,,, ;;;;;;;;                                                             
+                                                              ;;;;;;;;'`,,,,          ,            ,. ;';;;;;;'                                                            
+                                                             .;;;;;;;;;   `           ,              .;;;;;;;;;                                                            
+                                                             ';;;;;;;;;               ,              ;;;;;;;;;'                                                            
+                                                             .;;;;;;;;'               ,              .;';;;;;;;                                                            
+                                                              ';;;;;;;;               ,               ;;;;;;;;;                                                            
+                                                              ,;;;;';;  ,,            ,           `,.,.;;;;';;                                                             
+                                                               `;;';; `,.,          ::,:          .,,, `;;';;                                                              
+                                                                       ,,,.        :::,:::       .,,.`                                                                     
+                                                                  ,,   ,,,,,,     ::::.::::    ,,,,      ,                                                                 
+                                                                  ,,.   . ,,,.,. :::`   ::: ,,,,,        ,                                                                 
+                                                                  ..`      `,,,, :`;';;;;`: ,,,,         ,                                                                 
+                                                                   .,        ,,,,`;;;;;;;;,`,,.          `                                                                 
+                                                                   ,,        ,,, ;;;;;;;;';             .                                                                  
+                                                                   ,,            ;;;;;;;;;;'            ,                                                                  
+                                                                   ,,           `;;;;;;;;;;'            ,                                                                  
+                                                                   .,           :;;;;;;;;;;;            ,                                                                  
+                                                                   ,,,           ;;;;;;;;;;;            ,                                                                  
+                                                                   ,,,         , ;;;;;;;;;;;,,.         ,                                                                  
+                                                                    .         ,  ';;;;;;;'; ,,,        .,                                                                  
+                                                                    ;'      ,,    ';;;;;;;   `,,,     .,                                                                   
+                                                                  ';;;;;   ,       ,;;;;'      `,,, ,;;;;;                                                                 
+                                                                 `;;;;;;'.,                     `,, ;;;;;;;                                                                
+                                                                 ;;;;;;;;            ..            ;;;;;;;'                                                                
+                                                                 ;;;;;;;;            ..            ;;;;;;;;                                                                
+                                                                 ;;;;;;;;            ..`           ;;;;;;;;                                                                
+                                                                  ;;;;;;'            ...            ;;;;;;;                                                                
+                                                                  :;';;' ,,          ...        `,,`;;;;;;                                                                 
+                                                                    .:   ,,         `...        ,,,   ;'`                                                                  
+                                                                         .,,,       .  `       ,...                                                                        
+                                                                   .        ,,     `:::::   .`,,,        .                                                                 
+                                                                  ..         ,,`  ::::::::  .,,`         .                                                                 
+                                                                  ..          .,` ::::::::: ,,           ..                                                                
+                                                                  .`             ::::::::::              ..                                                                
+                                                                 ..              ::::::::::              ..                                                                
+                                                                 ..              ::::::::::              ...                                                               
+                                                                 ..              :::::::::,              `..                                                               
+                                                                ...               ::::::::`               ..                                                               
+                                                                ...                :::::::                ...                                                              
+                                                                ...                 :::; .                ...                                                              
+                                                               ...`                .......                ...                                                              
+                                                               ...                 .......                ....                                                             
+                                        ...:`                  ...                `.......                ....                                                             
+                                          ';`                                ,,                                                               ,,                           
+                                          ;;`                                ,,                                                               ,,                           
+                                          ;;`                                ,,                                                               ,,                           
+                                          ;;`                                ,,                                                               ,,                           
+                                 ;;       ;;`                                ,,                                                               ,,                           
+                                 ;;       ;;`                                ,,                                                               ,,                           
+                      .;:`     ``;;` `    ;;`      `:;.      ``;'`           ,, .,,,,`     ,, `,.  `,,    .,,   ,,,,`    ,,,,      ,,,,,`     ,,    .,,,.                  
+                    ;    ';     `;;`      ;;`    ';   ;;,    '    ;          ,,,.,..,,.    ., ,..  `,,    .,,  ,.,,,,.  ,,.,,,    ,,.,,,.,    ,,   ,,..,,,                 
+                   ;';   ;;`     ;;       ;;`    ;;   ';;    ;    `          ,,.`   ,,,    ,,,`    `,,    .,,  .,   `   ..  `    ,,,   `,.    ,,   ..   `                  
+                   :;.   ;;,     ;;       ;;`    ;;   ;;;    ;               ,,      .,,   ,,.     `,,    .,,  ,,       ,,      `,,      ,,   ,,   ,.                      
+                         ;;.     ;;       ;;`         ;;;    ;;;;;           ,,       ,,   ,,      `,,    .,,  .,,,     ,,,.    ,,,.,.,,,,.   ,,   `,,,`                   
+                     '';:;;.     ;;       ;;`     `'';;;;    `;;;;;'         ,,       ,.   ,,      `,,    .,,    ,,,,    .,.,.  ,,.,,,,,,,,   ,,     .,,,                  
+                   ;;;   ;;.     ;;       ;;`    ;;   ;;;      `;;;'         ,,      .,,   ,,       ,,    ,,,      ,..      ,,  ,,`           ,,       ,,,                 
+                   ;;    ;;.     ;;       ;;`   ;;;   ';;          ;   ``    ,,      ,,,   ,,       ,,    ,,,       ,,       ,.  ,,           ,,        ,,                 
+                   ;;   `;',     ;;   '   ;;`   ;;;   ;''    '     '  ....   ,,,.  `,.,    ,,       ,,,  ,.,   ,,  ,,,  ,,  ,,   ..,   `,,.   ,,   .,  .,,                 
+                   ;;;  ,;;;`    ;;` ``   ;;`   ;;; `;:;; ,  ;;    :  ....   ,, ,,,.,,     ,,        ,.,,,..   .,,,,,   .,,,,,    ,,,,,..,    ,,   ,.,,,,                  
+                    ;;;   ';:    `';'   ;;;;;;   ;;;;  ;;'     '';,    ..    ,,  .,,,      ,,         ,,,,`     ,,,,     ,,,.      `,,,,      ,,    .,,,                   
+                                                                                                                                                                           
+                                                                                                                                                                           
+                                                                                                                                                                           
+                                                                                                                                                                           
+                                                                                                                                                                           
+                                                                                                                                                                           
+                                                                                                                                                                           
+                                                                                                                                                                           
+                                                                                                                                                                           
+                                                                                                                                                                           
+                                                                                                                                                                           
+                                                                                                                                                                           
+                                                                                                                                                                           
+                                                                                                                                                                           
+                                                                                                                                                                           
+
+
+
+-->
+
+
+
+	
+<style>
+	
+	
+	
+	
+	</style>
+</head>
+
+<header>
+	<div id="header">
+		<img id="logoatlas" src="ATLAS/images/charte-graphique-atlas-page-explore.png" width="65%"><a href="https://atlas.brussels"><img id="linkatlas" style="float:right" src="ATLAS/images/charte-graphique-atlas-page-explore-reduit.png" width="18%"></a>
+	</div>
+</header>
+
+<!-- BBTlanduseGRID  -->
+<body onload="BBTdensJOBSsect();LDG();layersPROV()";>
+	
+	<div class="LDG" id="LDG">
+			<img style = "height : 75% ;" src = "ATLAS/images/loading-logo-small.png"/>
+		</div>
+	
+	<div id= "mapcontainer" >
+		
+
+		
+		
+		
+		
+<!-- ************** TOOLBOX ************** -->
+<!-- ************** TOOLBOX ************** -->
+		
+		<!--<div class="toolbox" id="toolbox"><b>Toolbox</b></div>-->
+		
+		
+		<!--<div id="outilAlogo">
+			<div id="outilAlabel"><p>Reset zoom<br>to initial value</p></div>
+			<img style = "height : 75% ;" src = "ATLAS/images/zoomout-noir.png"/>
+		</div>-->
+		<div id="menusandshortcuts">
+		<div id="shortcutA">
+			<img style = "height : 100% ;" src = "ATLAS/images/layers.png"/>
+			<div id="shortcutlabelA">Dataset<br><b>Select data to be displayed</b></div>
+		</div>
+		
+		<div id="shortcutB">
+			<img style = "height : 100% ;" src = "ATLAS/images/area.png"/>
+			<div id="shortcutlabelB">Study area<br><b>Switch to Belgium</b></div>
+		</div>
+		
+		<div id="shortcutC">
+			<img style = "height : 100% ;" src = "ATLAS/images/resolevel.png"/>
+			<div id="shortcutlabelC">Resolution level<br><b>Switch to municipalities</b></div>
+		</div>
+		
+		<div id="shortcutD">
+			<img style = "height : 100% ;" src = "ATLAS/images/options.png"/>
+			<div id="shortcutlabelD">This map<br><b>All specifications</b></div>
+		</div>
+		
+		
+		
+		
+		
+		
+		<div id="shortcutslabelE"><b>Increase or decrease<br>the number of communities</b></div>
+		
+		<div id="shortcutsE">
+		
+		<div id="shortcutE1">
+			<img style = "height : 100% ;" src = "ATLAS/images/plus-noir-signe.png"/>
+		</div>
+			<div id="shortcutE2">
+			<img style = "height : 100% ;" src = "ATLAS/images/moins-noir-signe.png"/>
+		</div>
+			<div id="shortcutE3">
+			<img style = "height : 100% ;" src = "ATLAS/images/switch-noir.png"/>
+		</div>
+			
+		
+		
+			
+		
+		</div>
+		
+			<div id="shortcutslabelF"><b>Superimpose communities on other layers</b><br>and access to descriptive statistics on click</div>
+		
+		<div id="shortcutsF">
+		<div id="shortcutF1">
+			
+			<img style = "height : 100% ;" src = "ATLAS/images/population-density-2.png"/>
+			<div id="shortcutF1label"><p>Over a layer<br>of population density</p></div>
+		</div>
+			<div id="shortcutF2">
+			<img style = "height : 100% ;" src = "ATLAS/images/built-up-density-2.png"/>
+			<div id="shortcutF2label"><p>Over a layer<br>of build-up density</p></div>
+		</div>
+		
+		
+			<div id="shortcutF3">
+			<img style = "height : 100% ;" src = "ATLAS/images/metro-areas-2.png"/>
+			<div id="shortcutF3label"><p>Over a layer<br>of OECD metropolitan areas</p></div>
+		</div>
+			
+			<div id="shortcutF4">
+			<img style = "height : 100% ;" src = "ATLAS/images/no-additionnal-layer-2.png"/>
+			<div id="shortcutF4label"><p>No additional layer</p></div>
+		</div>
+			
+		
+			
+		</div>
+			
+		
+			
+		
+		
+			
+		<div id="shortcutslabelG"><b>Directly switch<br>to a specific hour</b></div>
+                      
+                      <div id="shortcutsG">
+                          
+                          <div id="shortcutG3"><img style = "height : 100% ;" src = "ATLAS/images/00am.png"/></div>
+                          <div id="shortcutG4"><img style = "height : 100% ;" src = "ATLAS/images/06am.png"/></div>
+                          <div id="shortcutG5"><img style = "height : 100% ;" src = "ATLAS/images/12pm.png"/></div>
+                          <div id="shortcutG6"><img style = "height : 100% ;" src = "ATLAS/images/06pm.png"/></div>
+                          <div id="shortcutG7"><img style = "height : 100% ;" src = "ATLAS/images/day.png"/></div>
+                           </div>
+                          <div id="shortcutsGbis">
+                           
+                            <div id="shortcutG1"><img style = "height : 130% ;" src = "ATLAS/images/moins1.png"/></div>
+                             <div class="selectedhour" id="shortcutG00am"><img style = "height : 130% ;" src = "ATLAS/images/00am-blanc.png"/></div> 
+                             <div class="selectedhour" id="shortcutG01am"><img style = "height : 130% ;" src = "ATLAS/images/01am-blanc.png"/></div> 
+                             <div class="selectedhour" id="shortcutG02am"><img style = "height : 130% ;" src = "ATLAS/images/02am-blanc.png"/></div> 
+                             <div class="selectedhour" id="shortcutG03am"><img style = "height : 130% ;" src = "ATLAS/images/03am-blanc.png"/></div> 
+                             <div class="selectedhour" id="shortcutG04am"><img style = "height : 130% ;" src = "ATLAS/images/04am-blanc.png"/></div> 
+                             <div class="selectedhour" id="shortcutG05am"><img style = "height : 130% ;" src = "ATLAS/images/05am-blanc.png"/></div> 
+                             <div class="selectedhour" id="shortcutG06am"><img style = "height : 130% ;" src = "ATLAS/images/06am-blanc.png"/></div> 
+                             <div class="selectedhour" id="shortcutG07am"><img style = "height : 130% ;" src = "ATLAS/images/07am-blanc.png"/></div> 
+                             <div class="selectedhour" id="shortcutG08am"><img style = "height : 130% ;" src = "ATLAS/images/08am-blanc.png"/></div> 
+                             <div class="selectedhour" id="shortcutG09am"><img style = "height : 130% ;" src = "ATLAS/images/09am-blanc.png"/></div> 
+                             <div class="selectedhour" id="shortcutG10am"><img style = "height : 130% ;" src = "ATLAS/images/10am-blanc.png"/></div> 
+                             <div class="selectedhour" id="shortcutG11am"><img style = "height : 130% ;" src = "ATLAS/images/11am-blanc.png"/></div> 
+                             <div class="selectedhour" id="shortcutG12pm"><img style = "height : 130% ;" src = "ATLAS/images/12pm-blanc.png"/></div> 
+                             <div class="selectedhour" id="shortcutG01pm"><img style = "height : 130% ;" src = "ATLAS/images/01am-blanc.png"/></div> 
+                             <div class="selectedhour" id="shortcutG02pm"><img style = "height : 130% ;" src = "ATLAS/images/02pm-blanc.png"/></div> 
+                             <div class="selectedhour" id="shortcutG03pm"><img style = "height : 130% ;" src = "ATLAS/images/03pm-blanc.png"/></div> 
+                             <div class="selectedhour" id="shortcutG04pm"><img style = "height : 130% ;" src = "ATLAS/images/04pm-blanc.png"/></div> 
+                             <div class="selectedhour" id="shortcutG05pm"><img style = "height : 130% ;" src = "ATLAS/images/05pm-blanc.png"/></div> 
+                             <div class="selectedhour" id="shortcutG06pm"><img style = "height : 130% ;" src = "ATLAS/images/06pm-blanc.png"/></div> 
+                             <div class="selectedhour" id="shortcutG07pm"><img style = "height : 130% ;" src = "ATLAS/images/07pm-blanc.png"/></div> 
+                             <div class="selectedhour" id="shortcutG08pm"><img style = "height : 130% ;" src = "ATLAS/images/08pm-blanc.png"/></div> 
+                             <div class="selectedhour" id="shortcutG09pm"><img style = "height : 130% ;" src = "ATLAS/images/09pm-blanc.png"/></div> 
+                             <div class="selectedhour" id="shortcutG10pm"><img style = "height : 130% ;" src = "ATLAS/images/10pm-blanc.png"/></div> 
+                             <div class="selectedhour" id="shortcutG11pm"><img style = "height : 130% ;" src = "ATLAS/images/11pm-blanc.png"/></div> 
+                            
+                          <div id="shortcutG2"><img style = "height : 130% ;" src = "ATLAS/images/plus1.png"/></div>
+                          
+                         
+                         
+                          </div>
+		
+		<!--<div id="shortcutsG1">
+		<div id="shortcutGmoins1"><img style = "height : 100% ;" src = "ATLAS/images/moins1.png"/></div>
+		<div id="shortcutGplus1"><img style = "height : 100% ;" src = "ATLAS/images/plus1.png"/></div>
+		
+			</div><div id="shortcutsG2">
+		<div id="shortcutG00am"><img style = "height : 100% ;" src = "ATLAS/images/00am.png"/></div>
+		<div id="shortcutG06am"><img style = "height : 100% ;" src = "ATLAS/images/06am.png"/></div>
+		<div id="shortcutG12pm"><img style = "height : 100% ;" src = "ATLAS/images/12pm.png"/></div>
+		<div id="shortcutG18pm"><img style = "height : 100% ;" src = "ATLAS/images/06pm.png"/></div>
+		-->
+			
+		
+		
+		
+	
+	</div>
+		
+		
+		
+		
+		
+		
+		
+		<div id="outilBlogo">
+			<img style = "height : 75% ;" src = "ATLAS/images/plus-noir.png"/>
+			<div id="outilBlabel"><p>Methodological comments<br>about this map</p></div>
+		</div>
+		
+		<div id="outilBfull"><div id="outilBreduce"><img style = "width : 100% ;" src = "ATLAS/images/moins.png"/></div>
+			<div class ="title5" id="title5"><p><b>Methodological comments about this map</b></p></div>
+			<div class = "explications" id="detailsaboutthismap"><p>Details</p></div>
+		</div>
+		
+		<div id="outilClogo">
+			<img style = "height : 75% ;" src = "ATLAS/images/comments-noir.png"/>
+			<div id="outilClabel"><p>Geographical comments<br>about this map</p></div>
+		</div>
+		
+		<div id="outilCfull"><div id="outilCreduce"><img style = "width : 100% ;" src = "ATLAS/images/moins.png"/></div>
+			<div class ="title5" id="title5"><p><b>Geographical comments about this map</b></p></div>
+			<div class = "explications" id="commentsaboutthismap"><p>Comments</p></div>
+		</div>
+		
+		<div id="outilDlogo">
+			<img style = "height : 75% ;" src = "ATLAS/images/saveas-noir.png"/>
+			<div id="outilDlabel"><p>Download<br> this map</p></div>
+		</div>
+		
+		<div id="outilDfull"><div id="outilDreduce"><img style = "width : 100% ;" src = "ATLAS/images/moins.png"/></div>
+			<div class ="title5" id="title5"><p><b>Download this map</b></p></div>
+			<div class = "explications" id="downloadthismap"><p>Download</p></div>
+		</div>
+			
+		
+<!-- ************** MENUS ************** -->
+		
+		<!-- menu A 
+		<div id="menuAopen" class="menuopen">
+			<div id="menuAlabel" class="menulabel"><p>Brussels or Belgium?</p></div>
+			<img style = "height : 100% ;" src = "ATLAS/images/area.png"/>
+		</div>
+		<div id="menuAfull" class="menufull">
+			<div id="menuAreduce" class="menureduce"><img onclick = "BBTdensPOPgrid();LDG();layersBBTgrid()" style = "width : 100% ;" src = "ATLAS/images/moins.png"/>
+			</div>
+			
+			<div class ="title3" id="title3">
+				<p><b>Switch study area:</b><br>Brussels or Belgium</p>
+			</div>
+			
+			<div class = "boutonsvariables" >
+				<button type="submit" class="buttonLevel1" id="buttonBBT" onclick = "BBTdensPOPgrid();LDG();layersBBTgrid()">
+					<div id="buttonBBT">
+						<img class="logo" src = "ATLAS/images/logoBBT.png"/>
+						<b>Brussels&nbsp;and&nbsp;its surroundings</b>
+					</div>
+				</button>
+				
+				<button type="submit" class="buttonLevel1" id="buttonBGQ" onclick = "BGQdensPOPcomm();LDG();layersBGQadmin()">
+					<div id="buttonBGQ">
+						<img class="logo" src = "ATLAS/images/logoBGQ.png"/>
+						<b>Belgium</b>
+					</div>
+				</button>
+			</div>
+			<p class ="explications">By default if menu closed: Brussels</p>
+		</div>
+		-->
+		
+		
+		
+		<!-- menus B 
+	
+		<div id="menudatasetopen" class="menuopen">
+			<div id="menudatasetlabel" class="menulabel"><p>Which information?</p></div>
+			<img style = "height : 100% ;" src = "ATLAS/images/layers.png"/>
+		</div>-->
+		
+		<div id="menudatasetfull"class="menufull">
+			<div id="menudatasetreduce" class="menureduce">
+				<img style = "width : 100% ;" src = "ATLAS/images/moins.png"/>
+			</div>			
+			<div class ="title3"><p><b>Choose dataset </b>to be displayed</p></div>
+			<p class ="explications">The first datasets describe places according to demographical, economical and morphological features. They may be helpful  to contextualize analyses on other datasets revealing diverse kind of <b>interaction basins</b> in Brussels and Belgium.</p>
+			
+			
+			
+			<div class = "boutonsvariables">
+				
+				<div><p style="background-color: #c3c3c3; padding: 1%"><b>Contextualization</b><br>Demographical, economical and morphological features</p></div>
+			
+				<hr>
+			<div class = "boutonsvariables2">
+				<div class="linkintitule" ><p><b>Population density</b><br>Distribution of population at the place of residence</p></div>
+				<button class="link2" onclick = "BBTdensPOPsect();LDG();layersPROV()"><p><b>BRUSSELS</b></p></button>
+				<button class="link2" onclick = "BGQdensPOPcomm();LDG();layersBGQadmin()"><p><b>BELGIUM</b></p>
+				</button>
+			</div>
+			<hr>
+			<div class = "boutonsvariables2">
+				<div class="linkintitule" ><p><b>Jobs density</b><br>Distribution of population at the place of work</p></div>
+				<button class="link2" onclick = "BBTdensJOBSsect();LDG();layersPROV()"><p><b>BRUSSELS</b></p></button>
+				<button class="link2" onclick = "BGQdensJOBScomm();LDG();layersBGQadmin()"><p><b>BELGIUM</b></p>
+				</button>
+			</div>
+			<hr>
+				<div class = "boutonsvariables2">
+				<div class="linkintitule" ><p><b>Built-up density</b><br>Distribution of built-up coverage</p></div>
+				<button class="link2" onclick = "BBTdensBATsect();LDG();layersPROV()"><p><b>BRUSSELS</b></p></button>
+				<button class="link2" onclick = "BGQdensBATcomm();LDG();layersBGQadmin()"><p><b>BELGIUM</b></p>
+				</button>
+			</div>
+			<hr>
+				
+			<div class = "boutonsvariables2">
+				<div class="linkintitule" ><p><b>Land use</b><br>Classification of the main land use by basic spatial unit</p></div>
+				<button class="link2" onclick = "BBTlanduseGRID();LDG();layersBBTgrid()"><p><b>BRUSSELS</b></p></button>
+				
+			</div>
+			<hr>
+			<!--<div class = "boutonsvariables2">
+				<div class="linkintitule" ><p><b>Administrative delineations</b><br>Belonging to Provinces/Regions</p></div>
+				<button class="link2" onclick = "BBTprovincesCOMM();LDG();layersPROV()"><p><b>BRUSSELS</b></p></button>
+				<button class="link2" onclick = "BGQprovinces();LDG();layersBGQadmin()"><p><b>BELGIUM</b></p>
+				</button>
+			</div>
+				<hr>-->
+				
+				<div><p style="background-color: #c3c3c3; padding: 1%"><b>Interactions</b><br>Results of analyses based on interrelations between places (partitions based on community detection algorithms)</p></div>
+				<hr>
+			<div class = "boutonsvariables2">
+				<div class="linkintitule" ><p><b>Commuting data</b><br>Communities based on the intensity of regular journeys made from home- to work-places</p></div>
+				<button class="link2" onclick = "BBTnavc10c05();LDG();layersBBTadmin()"><p><b>BRUSSELS</b></p></button>
+				<button class="link2" onclick = "BGQnavc10c09();LDG();layersBGQadmin()"><p><b>BELGIUM</b></p>
+				</button>
+			</div>
+				<hr>
+			<div class = "boutonsvariables2">
+				<div class="linkintitule" ><p><b>Migration data</b><br>Communities based on the intensity of permanent house moving between places</p></div>
+				<button class="link2" onclick = "BBTmigc50c13();LDG();layersBBTadmin()"><p><b>BRUSSELS</b></p></button>
+				<button class="link2" onclick = "BGQmigc50c16();LDG();layersBGQadmin()"><p><b>BELGIUM</b></p>
+				</button>
+				
+			</div>
+				
+				<hr>
+			<div class = "boutonsvariables2">
+				
+				<div class="linkintitule" ><p><b>Mobile phone calls data</b><br>Communities based on the intensity of phone calls between antennas</p></div>
+				
+				<button class="link2" onclick = "BBTcallsGENc10c8();LDG();layersBBTphone();"><p><b>BRUSSELS</b><br>General<br>dataset</p></button>
+				<button class="link2" onclick = "BBTcallsDAYc10c6();LDG();layersBBTphone();"><p><b>BRUSSELS</b><br>Daytime<br>calls</p></button>
+				<button class="link2" onclick = "BBTcallsNIGHTc10c7();LDG();layersBBTphone();"><p><b>BRUSSELS</b><br>Nighttime<br>calls</p></button>
+				
+			</div>
+				
+				<hr>
+				
+				<div class = "boutonsvariables2">
+				<div class="linkintitule" ><p><b>Trucks circulations</b><br>Communities based on the internsity of circulations of trucks (seen as a proxy of goods exchanges)</p></div>
+					<button class="link2" onclick = "BBTtrucksGENc10c7();LDG();layersBBTgrid()"><p><b>BRUSSELS</b><br>General<br>dataset</p></button>
+					<button class="link2" onclick = "BBTtrucksBELc10c8();LDG();layersBBTgrid()"><p><b>BRUSSELS</b><br>Belgian<br>trucks</p></button>
+					<button class="link2" onclick = "BBTtrucksFORc10c12();LDG();layersBBTgrid()"><p><b>BRUSSELS</b><br>Foreign<br>trucks</p></button>
+				
+			</div>
+				
+				
+				
+				<hr>
+				
+				
+			<div class = "boutonsvariables2">
+				
+				<div class="linkintitule" ><p><b>iRail data</b><br>Communities based on the intensity of train trips requests between stations</p></div>
+				
+				<button class="link2" onclick = "BGQirailCOM();LDG();layersBGQirail()"><p><b>BELGIUM</b></p></button>
+				
+				
+				
+			</div>
+				
+				
+				<hr>
+				
+				
+			<div class = "boutonsvariables2">
+				
+				<div class="linkintitule" ><p><b>Twitter data</b><br>Communities based on the intensity of reply-to geo-located tweets</p></div>
+				
+				<button class="link2" onclick = "BGQtwitCOM();LDG();layersBGQadmin()"><p><b>BELGIUM</b></p></button>
+				
+				
+				
+			</div>
+				<hr>
+				<div><p style="background-color: #c3c3c3; padding: 1%"><b>Other analyses</b><br>Complementary analyses based on similar datasets as previous section</p></div>
+				<hr>
+				
+				<div class = "boutonsvariables2">
+				<div class="linkintitule" ><p><b>Trucks circulations</b><br>Circulations of trucks: trafic and connections approaches</p></div>
+					<button class="link2" onclick = "BBTtrucksTRAFday();LDG();layersBBTgrid()"><p><b>BRUSSELS</b><br>Traffic<br>(daily)</p></button>
+					<button class="link2" onclick = "BBTtrucksTRAF09am();LDG();layersBBTgrid()"><p><b>BRUSSELS</b><br>Traffic<br>(hourly)</p></button>
+					<button class="link2" onclick = "BBTtrucksCONNday();LDG();layersBBTgrid()"><p><b>BRUSSELS</b><br>Connections<br>(daily)</p></button>
+					<button class="link2" onclick = "BBTtrucksCONN09am();LDG();layersBBTgrid()"><p><b>BRUSSELS</b><br>Connections<br>(hourly)</p></button>
+					
+				
+			</div>
+				<hr>
+				<div class = "boutonsvariables2">
+				
+				<div class="linkintitule" ><p><b>Twitter data</b><br>Distribution of  reply-to geo-located tweets</p></div>
+				
+				<button class="link2" onclick = "BBTdensTWIcomm();LDG();layersBGQadmin()"><p><b>BELGIUM</b></p></button>
+				
+				
+				
+				
+				
+			</div>
+				<hr>
+				
+				
+				
+				
+				
+			
+			
+			
+				</div>
+		</div>
+		
+		
+		
+		
+		<!-- menus C -->
+		
+		<div id="menuC1BBTBfull" class="menufull">
+			<div id="menuC1BBTBreduce" class="menureduce">
+				<img style = "width : 100% ;" src = "ATLAS/images/moins.png"/></div>
+			
+			<div class ="title3"><p><b>Map specifications</b></p></div>
+			
+			<div class = "boutonsvariables" >
+				
+			<div class = "explications2"><p><b>Communities only</b><br>Chorochromatic map</p></div>
+				<button class="buttonmenuC1BBTB" onclick = "BBTnavc20c02();LDG();layersBBTadmin()"><b>2</b></button>
+				<button class="buttonmenuC1BBTB" onclick = "BBTnavc15c03();LDG();layersBBTadmin()"><b>3</b></button>
+				<button class="buttonmenuC1BBTB" onclick = "BBTnavc10c05();LDG();layersBBTadmin()"><b>5</b></button>
+				<button class="buttonmenuC1BBTB" onclick = "BBTnavc07c11();LDG();layersBBTadmin()"><b>11</b></button>
+				<button class="buttonmenuC1BBTB" onclick = "BBTnavc05c18();LDG();layersBBTadmin()"><b>18</b></button>
+			
+			
+			<div class = "explications2"><p><b>Communities and population density</b><br>with descriptive statistics of communities</p></div>
+			
+				<button class="buttonmenuC1BBTB" onclick = "BBTdensPOPnavc20c02();LDG();layersBBTcommplus()"><b>2</b></button>
+				<button class="buttonmenuC1BBTB" onclick = "BBTdensPOPnavc15c03();LDG();layersBBTcommplus()"><b>3</b></button>
+				<button class="buttonmenuC1BBTB" onclick = "BBTdensPOPnavc10c05();LDG();layersBBTcommplus()"><b>5</b></button>
+				<button class="buttonmenuC1BBTB" onclick = "BBTdensPOPnavc07c11();LDG();layersBBTcommplus()"><b>11</b></button>
+				<button class="buttonmenuC1BBTB" onclick = "BBTdensPOPnavc05c18();LDG();layersBBTcommplus()"><b>18</b></button>
+			
+			
+			<div class = "explications2"><p><b>Communities and built-up density</b><br>with descriptive statistics of communities</p></div>
+			
+				<button class="buttonmenuC1BBTB" onclick = "BBTdensBATnavc20c02();LDG();layersBBTcommplus()"><b>2</b></button>
+				<button class="buttonmenuC1BBTB" onclick = "BBTdensBATnavc15c03();LDG();layersBBTcommplus()"><b>3</b></button>
+				<button class="buttonmenuC1BBTB" onclick = "BBTdensBATnavc10c05();LDG();layersBBTcommplus()"><b>5</b></button>
+				<button class="buttonmenuC1BBTB" onclick = "BBTdensBATnavc07c11();LDG();layersBBTcommplus()"><b>11</b></button>
+				<button class="buttonmenuC1BBTB" onclick = "BBTdensBATnavc05c18();LDG();layersBBTcommplus()"><b>18</b></button>
+			
+			</div>
+		
+		</div>
+				
+		
+		<div id="menuC1BBTCfull" class="menufull">
+			<div id="menuC1BBTCreduce" class="menureduce">
+				<img style = "width : 100% ;" src = "ATLAS/images/moins.png"/>
+			</div>
+			
+			<div class ="title3"><p><b>Map specifications</b></p></div>
+			
+			
+			<div class = "boutonsvariables" >
+				
+			<div class = "explications2"><p><b>Communities only</b><br>Chorochromatic map</p></div>
+			
+				
+				<button class="buttonmenuC1BBTC" onclick = "BBTmigc100c06();LDG();layersBBTadmin()"><b>6</b></button>
+				<button class="buttonmenuC1BBTC" onclick = "BBTmigc70c09();LDG();layersBBTadmin()"><b>9</b></button>
+				<button class="buttonmenuC1BBTC" onclick = "BBTmigc50c13();LDG();layersBBTadmin()"><b>13</b></button>
+				<button class="buttonmenuC1BBTC" onclick = "BBTmigc30c18();LDG();layersBBTadmin()"><b>18</b></button>
+				<button class="buttonmenuC1BBTC" onclick = "BBTmigc20c30();LDG();layersBBTadmin()"><b>30</b></button>
+			
+				
+			<div class = "explications2"><p><b>Communities and population density</b><br>with descriptive statistics of communities </p></div>
+			
+				<button class="buttonmenuC1BBTC" onclick = "BBTdensPOPmigc100c06();LDG();layersBBTcommplus()"><b>6</b></button>
+				<button class="buttonmenuC1BBTC" onclick = "BBTdensPOPmigc70c09();LDG();layersBBTcommplus()"><b>9</b></button>
+				<button class="buttonmenuC1BBTC" onclick = "BBTdensPOPmigc50c13();LDG();layersBBTcommplus()"><b>13</b></button>
+				<button class="buttonmenuC1BBTC" onclick = "BBTdensPOPmigc30c18();LDG();layersBBTcommplus()"><b>18</b></button>
+				<button class="buttonmenuC1BBTC" onclick = "BBTdensPOPmigc20c30();LDG();layersBBTcommplus()"><b>30</b></button>
+			
+			
+			<div class = "explications2"><p><b>Communities and built-up density</b><br>with descriptive statistics of communities</p></div>
+			
+				<button class="buttonmenuC1BBTC" onclick = "BBTdensBATmigc100c06();LDG();layersBBTcommplus()"><b>6</b></button>
+				<button class="buttonmenuC1BBTC" onclick = "BBTdensBATmigc70c09();LDG();layersBBTcommplus()"><b>9</b></button>
+				<button class="buttonmenuC1BBTC" onclick = "BBTdensBATmigc50c13();LDG();layersBBTcommplus()"><b>13</b></button>
+				<button class="buttonmenuC1BBTC" onclick = "BBTdensBATmigc30c18();LDG();layersBBTcommplus()"><b>18</b></button>
+				<button class="buttonmenuC1BBTC" onclick = "BBTdensBATmigc20c30();LDG();layersBBTcommplus()"><b>30</b></button>
+			
+			</div>
+		
+		</div>
+		
+		
+		<div id="menuC1BBTDfull" class="menufull">
+			<div id="menuC1BBTDreduce" class="menureduce">
+				<img style = "width : 100% ;" src = "ATLAS/images/moins.png"/>
+			</div>
+			
+			<div class ="title3"><p><b>Map specifications</b></p></div>
+			
+			
+	
+			<div class = "boutonsvariables" >
+				
+				<div class = "explications2"><p><b>Communities only</b><br>Chorochromatic map</p></div>
+				
+				<button class="buttonmenuC1BBTD" onclick = "BBTcallsGENc16c3();LDG();layersBBTphone()"><b>3</b></button>
+				<button class="buttonmenuC1BBTD" onclick = "BBTcallsGENc14c4();LDG();layersBBTphone()"><b>4</b></button>
+				<button class="buttonmenuC1BBTD" onclick = "BBTcallsGENc12c5();LDG();layersBBTphone()"><b>5</b></button>
+				<button class="buttonmenuC1BBTD" onclick = "BBTcallsGENc10c8();LDG();layersBBTphone()"><b>8</b></button>
+				<button class="buttonmenuC1BBTD" onclick = "BBTcallsGENc08c10();LDG();layersBBTphone()"><b>10</b></button>
+				<button class="buttonmenuC1BBTD" onclick = "BBTcallsGENc06c15();LDG();layersBBTphone()"><b>15</b></button>
+			
+			
+			
+			<div class = "explications2"><p><b>Communities and population density</b><br>with descriptive statistics of communities </p></div>
+			
+			
+			
+				
+				<button class="buttonmenuC1BBTD" onclick = "BBTdensPOPcallsGENc16c3();LDG();layersBBTphoneplus()"><b>3</b></button>
+				<button class="buttonmenuC1BBTD" onclick = "BBTdensPOPcallsGENc14c4();LDG();layersBBTphoneplus()"><b>4</b></button>
+				<button class="buttonmenuC1BBTD" onclick = "BBTdensPOPcallsGENc12c5();LDG();layersBBTphoneplus()"><b>5</b></button>
+				<button class="buttonmenuC1BBTD" onclick = "BBTdensPOPcallsGENc10c8();LDG();layersBBTphoneplus()"><b>8</b></button>
+				<button class="buttonmenuC1BBTD" onclick = "BBTdensPOPcallsGENc08c10();LDG();layersBBTphoneplus()"><b>10</b></button>
+				<button class="buttonmenuC1BBTD" onclick = "BBTdensPOPcallsGENc06c15();LDG();layersBBTphoneplus()"><b>15</b></button>
+			
+			
+			
+			<div class = "explications2"><p><b>Communities and built-up density</b><br>with descriptive statistics of communities</p></div>
+			
+			
+				
+				<button class="buttonmenuC1BBTD" onclick = "BBTdensBATcallsGENc16c3();LDG();layersBBTphoneplus()"><b>3</b></button>
+				<button class="buttonmenuC1BBTD" onclick = "BBTdensBATcallsGENc14c4();LDG();layersBBTphoneplus()"><b>4</b></button>
+				<button class="buttonmenuC1BBTD" onclick = "BBTdensBATcallsGENc12c5();LDG();layersBBTphoneplus()"><b>5</b></button>
+				<button class="buttonmenuC1BBTD" onclick = "BBTdensBATcallsGENc10c8();LDG();layersBBTphoneplus()"><b>8</b></button>
+				<button class="buttonmenuC1BBTD" onclick = "BBTdensBATcallsGENc08c10();LDG();layersBBTphoneplus()"><b>10</b></button>
+				<button class="buttonmenuC1BBTD" onclick = "BBTdensBATcallsGENc06c15();LDG();layersBBTphoneplus()"><b>15</b></button>
+			
+			</div>
+		
+		</div>
+				
+		
+		<div id="menuC1BBTEfull" class="menufull">
+			<div id="menuC1BBTEreduce" class="menureduce"><img style = "width : 100% ;" src = "ATLAS/images/moins.png"/>
+			</div>
+			
+			<div class ="title3"><p><b>Map specifications</b></p></div>
+			
+			
+			
+			<div class = "boutonsvariables">
+				<div class = "explications2"><p><b>Communities only</b><br>Chorochromatic map</p></div>
+				<button class="buttonmenuC1BBTE" onclick = "BBTcallsDAYc20c3();LDG();layersBBTphone();"><b>3</b></button>
+				<button class="buttonmenuC1BBTE" onclick = "BBTcallsDAYc14c4();LDG();layersBBTphone()"><b>4</b></button>
+				<button class="buttonmenuC1BBTE" onclick = "BBTcallsDAYc12c4();LDG();layersBBTphone()"><b>4</b>*</button>
+				<button class="buttonmenuC1BBTE" onclick = "BBTcallsDAYc10c6();LDG();layersBBTphone()"><b>6</b></button>
+				<button class="buttonmenuC1BBTE" onclick = "BBTcallsDAYc08c8();LDG();layersBBTphone()"><b>8</b></button>
+				<button class="buttonmenuC1BBTE" onclick = "BBTcallsDAYc06c14();LDG();layersBBTphone()"><b>14</b></button>
+			<div class = "explications2"><p><b>Communities and population density</b><br>with descriptive statistics of communities </p></div>
+			
+				<button class="buttonmenuC1BBTE" onclick = "BBTdensPOPcallsDAYc20c3();LDG();layersBBTphoneplus()"><b>3</b></button>
+				<button class="buttonmenuC1BBTE" onclick = "BBTdensPOPcallsDAYc14c4();LDG();layersBBTphoneplus()"><b>4</b></button>
+				<button class="buttonmenuC1BBTE" onclick = "BBTdensPOPcallsDAYc12c4();LDG();layersBBTphoneplus()"><b>4</b>*</button>
+				<button class="buttonmenuC1BBTE" onclick = "BBTdensPOPcallsDAYc10c6();LDG();layersBBTphoneplus()"><b>6</b></button>
+				<button class="buttonmenuC1BBTE" onclick = "BBTdensPOPcallsDAYc08c8();LDG();layersBBTphoneplus()"><b>8</b></button>
+				<button class="buttonmenuC1BBTE" onclick = "BBTdensPOPcallsDAYc06c14();LDG();layersBBTphoneplus()"><b>14</b></button>
+			
+			<div class = "explications2"><p><b>Communities and built-up density</b><br>with descriptive statistics of communities</p></div>
+			
+				<button class="buttonmenuC1BBTE" onclick = "BBTdensBATcallsDAYc20c3();LDG();layersBBTphoneplus()"><b>3</b></button>
+				<button class="buttonmenuC1BBTE" onclick = "BBTdensBATcallsDAYc14c4();LDG();layersBBTphoneplus()"><b>4</b></button>
+				<button class="buttonmenuC1BBTE" onclick = "BBTdensBATcallsDAYc12c4();LDG();layersBBTphoneplus()"><b>4</b>*</button>
+				<button class="buttonmenuC1BBTE" onclick = "BBTdensBATcallsDAYc10c6();LDG();layersBBTphoneplus()"><b>6</b></button>
+				<button class="buttonmenuC1BBTE" onclick = "BBTdensBATcallsDAYc08c8();LDG();layersBBTphoneplus()"><b>8</b></button>
+				<button class="buttonmenuC1BBTE" onclick = "BBTdensBATcallsDAYc06c14();LDG();layersBBTphoneplus()"><b>14</b></button>
+			</div>
+			
+			<div class = "explications"><p><b>*</b>: alternative classification with the same amount of communities</p></div>
+			
+		
+		</div>
+		
+
+		
+		<div id="menuC1BBTFfull" class="menufull">
+			<div id="menuC1BBTFreduce" class="menureduce">
+				<img style = "width : 100% ;" src = "ATLAS/images/moins.png"/>
+			</div>
+			<div class ="title3"><p><b>Map specifications</b></p></div>
+			
+			<div class = "boutonsvariables" >
+				
+			<div class = "explications2"><p><b>Communities only</b><br>Chorochromatic map</p></div>
+			
+				<button class="buttonmenuC1BBTF" onclick = "BBTcallsNIGHTc20c3();LDG();layersBBTphone()"><b>3</b></button>
+				<button class="buttonmenuC1BBTF" onclick = "BBTcallsNIGHTc14c4();LDG();layersBBTphone()"><b>4</b></button>			
+				<button class="buttonmenuC1BBTF" onclick = "BBTcallsNIGHTc12c5();LDG();layersBBTphone()"><b>5</b></button>			
+				<button class="buttonmenuC1BBTF" onclick = "BBTcallsNIGHTc10c7();LDG();layersBBTphone()"><b>7</b></button>			
+				<button class="buttonmenuC1BBTF" onclick = "BBTcallsNIGHTc08c9();LDG();layersBBTphone()"><b>9</b></button>			
+				<button class="buttonmenuC1BBTF" onclick = "BBTcallsNIGHTc06c15();LDG();layersBBTphone()"><b>15</b></button>			
+					
+			<div class = "explications"><p><b>Communities and population density</b><br>with descriptive statistics of communities </p></div>
+			
+				
+				
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensPOPcallsNIGHTc20c3();LDG();layersBBTphoneplus()"><b>3</b></button>		
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensPOPcallsNIGHTc14c4();LDG();layersBBTphoneplus()"><b>4</b></button>		
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensPOPcallsNIGHTc12c5();LDG();layersBBTphoneplus()"><b>5</b></button>		
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensPOPcallsNIGHTc10c7();LDG();layersBBTphoneplus()"><b>7</b></button>		
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensPOPcallsNIGHTc08c9();LDG();layersBBTphoneplus()"><b>9</b></button>		
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensPOPcallsNIGHTc06c15();LDG();layersBBTphoneplus()"><b>15</b></button>
+			<div class = "explications2"><p><b>Communities and built-up density</b><br>with descriptive statistics of communities</p></div>
+			
+			
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensBATcallsNIGHTc20c3();LDG();layersBBTphoneplus()"><b>3</b></button>		
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensBATcallsNIGHTc14c4();LDG();layersBBTphoneplus()"><b>4</b></button>		
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensBATcallsNIGHTc12c5();LDG();layersBBTphoneplus()"><b>5</b></button>		
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensBATcallsNIGHTc10c7();LDG();layersBBTphoneplus()"><b>7</b></button>		
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensBATcallsNIGHTc08c9();LDG();layersBBTphoneplus()"><b>9</b></button>		
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensBATcallsNIGHTc06c15();LDG();layersBBTphoneplus()"><b>15</b></button>
+				
+			</div>
+		</div>
+
+	
+		<div id="menuC1BBTFfull" class="menufull">
+			<div id="menuC1BBTFreduce" class="menureduce">
+				<img style = "width : 100% ;" src = "ATLAS/images/moins.png"/>
+			</div>
+			<div class ="title3"><p><b>Map specifications</b></p></div>
+			
+			<div class = "boutonsvariables" >
+				
+			<div class = "explications2"><p><b>Communities only</b><br>Chorochromatic map</p></div>
+			
+				<button class="buttonmenuC1BBTF" onclick = "BBTcallsNIGHTc20c3();LDG();layersBBTphone()"><b>3</b></button>
+				<button class="buttonmenuC1BBTF" onclick = "BBTcallsNIGHTc14c4();LDG();layersBBTphone()"><b>4</b></button>			
+				<button class="buttonmenuC1BBTF" onclick = "BBTcallsNIGHTc12c5();LDG();layersBBTphone()"><b>5</b></button>			
+				<button class="buttonmenuC1BBTF" onclick = "BBTcallsNIGHTc10c7();LDG();layersBBTphone()"><b>7</b></button>			
+				<button class="buttonmenuC1BBTF" onclick = "BBTcallsNIGHTc08c9();LDG();layersBBTphone()"><b>9</b></button>			
+				<button class="buttonmenuC1BBTF" onclick = "BBTcallsNIGHTc06c15();LDG();layersBBTphone()"><b>15</b></button>			
+					
+			<div class = "explications"><p><b>Communities and population density</b><br>with descriptive statistics of communities </p></div>
+			
+				
+				
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensPOPcallsNIGHTc20c3();LDG();layersBBTphoneplus()"><b>3</b></button>		
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensPOPcallsNIGHTc14c4();LDG();layersBBTphoneplus()"><b>4</b></button>		
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensPOPcallsNIGHTc12c5();LDG();layersBBTphoneplus()"><b>5</b></button>		
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensPOPcallsNIGHTc10c7();LDG();layersBBTphoneplus()"><b>7</b></button>		
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensPOPcallsNIGHTc08c9();LDG();layersBBTphoneplus()"><b>9</b></button>		
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensPOPcallsNIGHTc06c15();LDG();layersBBTphoneplus()"><b>15</b></button>
+			<div class = "explications2"><p><b>Communities and built-up density</b><br>with descriptive statistics of communities</p></div>
+			
+			
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensBATcallsNIGHTc20c3();LDG();layersBBTphoneplus()"><b>3</b></button>		
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensBATcallsNIGHTc14c4();LDG();layersBBTphoneplus()"><b>4</b></button>		
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensBATcallsNIGHTc12c5();LDG();layersBBTphoneplus()"><b>5</b></button>		
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensBATcallsNIGHTc10c7();LDG();layersBBTphoneplus()"><b>7</b></button>		
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensBATcallsNIGHTc08c9();LDG();layersBBTphoneplus()"><b>9</b></button>		
+				<button class="buttonmenuC1BBTF" onclick = "BBTdensBATcallsNIGHTc06c15();LDG();layersBBTphoneplus()"><b>15</b></button>
+				
+			</div>
+		</div>
+		
+		
+		<div id="menuC1BBTGfull" class="menufull">
+			<div id="menuC1BBTGreduce" class="menureduce">
+				<img style = "width : 100% ;" src = "ATLAS/images/moins.png"/>
+			</div>
+			<div class ="title3"><p><b>Map specifications</b></p></div>
+			
+			<div class = "boutonsvariables" >
+				
+			<div class = "explications2"><p><b>Trucks circulations: general dataset</b><br>Change the number of communities</p></div>
+			
+			<button class="buttonmenuC1BBTG" onclick = "BBTtrucksGENc20c3();LDG();layersADMIN()"><b>3</b></button>
+			<button class="buttonmenuC1BBTG" onclick = "BBTtrucksGENc15c5();LDG();layersADMIN()"><b>5</b></button>
+			<button class="buttonmenuC1BBTG" onclick = "BBTtrucksGENc10c7();LDG();layersADMIN()"><b>7</b></button>
+			<button class="buttonmenuC1BBTG" onclick = "BBTtrucksGENc075c10();LDG();layersADMIN()"><b>10</b></button>
+			<button class="buttonmenuC1BBTG" onclick = "BBTtrucksGENc05c17();LDG();layersADMIN()"><b>17</b></button>
+				
+			<div class = "explications2"><p><b>Trucks circulations: Belgian trucks only</b><br>Change the number of communities</p></div>
+			
+			
+				
+				<button class="buttonmenuC1BBTG" onclick = "BBTtrucksBELc20c3();LDG();layersADMIN()"><b>3</b></button>
+			<button class="buttonmenuC1BBTG" onclick = "BBTtrucksBELc15c5();LDG();layersADMIN()"><b>5</b></button>
+			<button class="buttonmenuC1BBTG" onclick = "BBTtrucksBELc10c8();LDG();layersADMIN()"><b>6</b></button>
+			<button class="buttonmenuC1BBTG" onclick = "BBTtrucksBELc075c10();LDG();layersADMIN()"><b>9</b></button>
+			<button class="buttonmenuC1BBTG" onclick = "BBTtrucksBELc05c17();LDG();layersADMIN()"><b>16</b></button>
+				
+				<div class = "explications2"><p><b>Trucks circulations: foreign trucks only</b><br>Change the number of communities</p></div>
+			
+			<button class="buttonmenuC1BBTG" onclick = "BBTtrucksFORc20c6();LDG();layersADMIN()"><b>X</b></button>
+			<button class="buttonmenuC1BBTG" onclick = "BBTtrucksFORc15c9();LDG();layersADMIN()"><b>X</b></button>
+			<button class="buttonmenuC1BBTG" onclick = "BBTtrucksFORc10c12();LDG();layersADMIN()"><b>X</b></button>
+			<button class="buttonmenuC1BBTG" onclick = "BBTtrucksFORc075c17();LDG();layersADMIN()"><b>X</b></button>
+			
+				
+			
+				
+			</div>
+		</div>
+		
+		<div id="menuC2BGQBfull" class="menufull">
+			<div id="menuC2BGQBreduce" class="menureduce">
+				<img style = "width : 100% ;" src = "ATLAS/images/moins.png"/>
+			</div>
+			<div class ="title3"><p><b>Map specifications</b></p></div>
+			
+			
+			
+			<div class = "boutonsvariables" >
+				
+			<div class = "explications2"><p><b>Communities only</b><br>Chorochromatic map</p></div>
+				
+				<button class="buttonmenuC2BGQB" onclick = "BGQnavc20c06();LDG();layersBGQadmin()"><b>6</b></button>			
+				<button class="buttonmenuC2BGQB" onclick = "BGQnavc15c06();LDG();layersBGQadmin()"><b>6</b>*</button>			
+				<button class="buttonmenuC2BGQB" onclick = "BGQnavc10c09();LDG();layersBGQadmin()"><b>9</b></button>			
+				<button class="buttonmenuC2BGQB" onclick = "BGQnavc07c11();LDG();layersBGQadmin()"><b>11</b></button>			
+				<button class="buttonmenuC2BGQB" onclick = "BGQnavc05c16();LDG();layersBGQadmin()"><b>16</b></button>	
+				<button class="buttonmenuC2BGQB" onclick = "BGQnavc03c26();LDG();layersBGQadmin()"><b>26</b></button>	
+			
+			
+			<div class = "explications2"><p><b>Communities and population density</b><br>with descriptive statistics of communities </p></div>
+			
+			
+				
+				<button class="buttonmenuC2BGQB" onclick = "BGQdensPOPnavc20c06();LDG();layersBGQcommplus()"><b>6</b></button>			
+				<button class="buttonmenuC2BGQB" onclick = "BGQdensPOPnavc15c06();LDG();layersBGQcommplus()"><b>6</b>*</button>			
+				<button class="buttonmenuC2BGQB" onclick = "BGQdensPOPnavc10c09();LDG();layersBGQcommplus()"><b>9</b></button>			
+				<button class="buttonmenuC2BGQB" onclick = "BGQdensPOPnavc07c11();LDG();layersBGQcommplus()"><b>11</b></button>			
+				<button class="buttonmenuC2BGQB" onclick = "BGQdensPOPnavc05c16();LDG();layersBGQcommplus()"><b>16</b></button>	
+				<button class="buttonmenuC2BGQB" onclick = "BGQdensPOPnavc03c26();LDG();layersBGQcommplus()"><b>26</b></button>	
+			
+			
+			<div class = "explications2"><p><b>Communities and built-up density</b><br>with descriptive statistics of communities</p></div>
+			
+			
+				
+				<button class="buttonmenuC2BGQB" onclick = "BGQdensBATnavc20c06();LDG();layersBGQcommplus()"><b>6</b></button>		
+				<button class="buttonmenuC2BGQB" onclick = "BGQdensBATnavc15c06();LDG();layersBGQcommplus()"><b>6</b>*</button>		
+				<button class="buttonmenuC2BGQB" onclick = "BGQdensBATnavc10c09();LDG();layersBGQcommplus()"><b>9</b></button>		
+				<button class="buttonmenuC2BGQB" onclick = "BGQdensBATnavc07c11();LDG();layersBGQcommplus()"><b>11</b></button>		
+				<button class="buttonmenuC2BGQB" onclick = "BGQdensBATnavc05c16();LDG();layersBGQcommplus()"><b>16</b></button>	
+				<button class="buttonmenuC2BGQB" onclick = "BGQdensBATnavc03c26();LDG();layersBGQcommplus()"><b>26</b></button>	
+			
+			
+			<div class = "explications2"><p><b>Communities and metropolitan areas</b><br>with descriptive statistics of communities</p></div>
+			
+			
+				
+				<button class="buttonmenuC2BGQB" onclick = "BGQmetroAREASnavc20c06();LDG();layersBGQcommplus()"><b>6</b></button>		
+				<button class="buttonmenuC2BGQB" onclick = "BGQmetroAREASnavc15c06();LDG();layersBGQcommplus()"><b>6</b>*</button>		
+				<button class="buttonmenuC2BGQB" onclick = "BGQmetroAREASnavc10c09();LDG();layersBGQcommplus()"><b>9</b></button>		
+				<button class="buttonmenuC2BGQB" onclick = "BGQmetroAREASnavc07c11();LDG();layersBGQcommplus()"><b>11</b></button>		
+				<button class="buttonmenuC2BGQB" onclick = "BGQmetroAREASnavc05c16();LDG();layersBGQcommplus()"><b>16</b></button>	
+				<button class="buttonmenuC2BGQB" onclick = "BGQmetroAREASnavc03c26();LDG();layersBGQcommplus()"><b>26</b></button>	
+			</div>
+			
+			<div class = "explications"><p><b>*</b>: alternative classification with the same amount of communities</p></div>
+			
+		</div>
+				
+		
+		<div id="menuC2BGQCfull" class="menufull">
+			<div id="menuC2BGQCreduce" class="menureduce">
+				<img style = "width : 100% ;" src = "ATLAS/images/moins.png"/>
+			</div>
+			
+					
+			
+			<div class ="title3"><p><b>Map specifications</b></p></div>
+			
+			
+			<div class = "boutonsvariables" >
+				
+				<div class = "explications2"><p><b>Communities only</b><br>Chorochromatic map</p></div>
+			
+				
+				<button class="buttonmenuC2BGQC" onclick = "BGQmigc80c11();LDG();layersBGQadmin()"><b>11</b></button>			
+				<button class="buttonmenuC2BGQC" onclick = "BGQmigc70c12();LDG();layersBGQadmin()"><b>12</b></button>			
+				<button class="buttonmenuC2BGQC" onclick = "BGQmigc50c16();LDG();layersBGQadmin()"><b>16</b></button>			
+				<button class="buttonmenuC2BGQC" onclick = "BGQmigc30c25();LDG();layersBGQadmin()"><b>25</b></button>			
+				<button class="buttonmenuC2BGQC" onclick = "BGQmigc10c71();LDG();layersBGQadmin()"><b>71</b></button>	
+			<div class = "explications2"><p><b>Communities and population density</b><br>with descriptive statistics of communities </p></div>
+			
+				
+				<button class="buttonmenuC2BGQC" onclick = "BGQdensPOPmigc80c11();LDG();layersBGQcommplus()"><b>11</b></button>			
+				<button class="buttonmenuC2BGQC" onclick = "BGQdensPOPmigc70c12();LDG();layersBGQcommplus()"><b>12</b></button>			
+				<button class="buttonmenuC2BGQC" onclick = "BGQdensPOPmigc50c16();LDG();layersBGQcommplus()"><b>16</b></button>			
+				<button class="buttonmenuC2BGQC" onclick = "BGQdensPOPmigc30c25();LDG();layersBGQcommplus()"><b>25</b></button>			
+				<button class="buttonmenuC2BGQC" onclick = "BGQdensPOPmigc10c71();LDG();layersBGQcommplus()"><b>71</b></button>
+			
+			<div class = "explications2"><p><b>Communities and built-up density</b><br>with descriptive statistics of communities</p></div>
+			
+			
+				<button class="buttonmenuC2BGQC" onclick = "BGQdensBATmigc80c11();LDG();layersBGQcommplus()"><b>11</b></button>			
+				<button class="buttonmenuC2BGQC" onclick = "BGQdensBATmigc70c12();LDG();layersBGQcommplus()"><b>12</b></button>			
+				<button class="buttonmenuC2BGQC" onclick = "BGQdensBATmigc50c16();LDG();layersBGQcommplus()"><b>16</b></button>			
+				<button class="buttonmenuC2BGQC" onclick = "BGQdensBATmigc30c25();LDG();layersBGQcommplus()"><b>25</b></button>			
+				<button class="buttonmenuC2BGQC" onclick = "BGQdensBATmigc10c71();LDG();layersBGQcommplus()"><b>71</b></button>
+				
+			
+			<div class = "explications2"><p><b>Communities and metro areas</b><br>with descriptive statistics of communities </p></div>
+			
+				
+				<button class="buttonmenuC2BGQC" onclick = "BGQmetroAREASmigc80c11();LDG();layersBGQcommplus()"><b>11</b></button>			
+				<button class="buttonmenuC2BGQC" onclick = "BGQmetroAREASmigc70c12();LDG();layersBGQcommplus()"><b>12</b></button>			
+				<button class="buttonmenuC2BGQC" onclick = "BGQmetroAREASmigc50c16();LDG();layersBGQcommplus()"><b>16</b></button>			
+				<button class="buttonmenuC2BGQC" onclick = "BGQmetroAREASmigc30c25();LDG();layersBGQcommplus()"><b>25</b></button>			
+				<button class="buttonmenuC2BGQC" onclick = "BGQmetroAREASmigc10c71();LDG();layersBGQcommplus()"><b>71</b></button>	
+				
+			</div>
+			
+		</div>
+	
+
+		
+<!-- ************** TOOLTIPS / TITRES / LEGENDE / COPYRIGHT  ************** -->		
+		
+		<div class="infobox" id="infobox"></div>
+		<div class="infobox2" id="infobox2"></div>
+		<div class="infobox3" id="infobox3"></div>
+		
+		<div id="title1container"><div class="title1"></div></div>
+		<div id="subtitle1container"><div class="subtitle1"></div></div>		
+		
+		<div id= "legendecontainer">
+			<div class="title2"></div>
+		</div>
+		
+		<div id="copyrightlogo">
+			<img src="ATLAS/images/logo-GPL.png" width="32%" >
+			<div id="copyrightlabel"><p><b><strong>More details to cite,<br>share and reuse atlas.brussels</strong></b></p>
+			</div>
+		</div>
+		
+		<div id="copyrightfull">
+			<div id="copyrightreduce">
+				<img style = "width : 100% ;" src = "ATLAS/images/moins.png"/>
+			</div>
+			
+			<div class ="title5" id="title5">
+				<p><b>How to cite, share and reuse atlas.brussels</b></p>
+			</div>
+			
+			<div id="copyrightinfos">
+			
+			<div class = "explications" >
+				<p><strong><b>To cite and share atlas.brussels</b></strong></p>
+				<p>Please use the following reference:</p>
+				<p>F<span style="font-variant: small-caps;">inance</span> Olivier (2018). <i>atlas.brussels website</i> (Version&nbsp;1). Available online from&nbsp;https://atlas.brussels</p>
+				
+				<p><strong><b>To reuse atlas.brussels</b></strong></p>
+				<p>"atlas.brussels" is under two different licences: one for the code, one for the images to upload.</p>
+				<p><b>To reuse downloaded images</b></p>
+				<img src="ATLAS/images/creative-commons-by-nc-sa.png" width="90%" >
+				<p>Each map can be downloaded with the "save as" icon on the bottom right of the page and on the full project website, section "downloadable maps". These maps are protected by a Creative Commons <b>CC-BY-NC-SA&nbsp;2.0&nbsp;BE license</b>. This means you can share and adapt the material under the following terms: attribution (you must give appropriate credit to atlas.brussels), NonCommercial (you may not use the material for commercial purposes) and ShareAlike (if you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original). More information about this licence <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/be/deed.en" target="_blank"><b>here</b></a>.</p>
+				<p><b>To reuse code</b></p>
+				<img src="ATLAS/images/logo-GPL.png" width="90%" >
+				<p>Code created to generate atlas.brussels visualization tool is available under a <b>GNU Affero General Public License (AGPL 3.0)</b>. More information about this licence <a href="https://www.gnu.org/licenses/agpl-3.0.en.html" target="_blank"><b>here</b></a>.</p>
+				
+			</div>
+				
+				
+		
+			</div>
+			
+		</div>
+		
+		
+		
+		
+	<!-- fin de la div contenu carte -->	
+	</div>
+	
+	
+
+	
+
+
+
+   
+	</body>
+	
+
+
+	<script>
+
+	
+		
+		
+Swal.mixin({
+  
+	
+  confirmButtonText: 'Next &rarr;',
+  showCancelButton: true,
+  progressSteps: ['1', '2', '3', '4',],
+	reverseButtons: true,
+	cancelButtonText: 'Dismiss'
+	
+}).queue([
+  {
+    title: 'Welcome on atlas.brussels',
+   html: "<i>(beta version)</i><br><br>atlas.brussels is <b><strong>optimized for Chrome, Firefox and Opera</strong></b>. Please consider using another browser if you are on Safari, Edge or Internet Explorer.<br><br>The tool is still <b><strong>under development</strong></b>. During this beta phase, the content is subject to change frequently. Your feedback is more than welcome to help identify and fix bugs and to improve the contents.<br><br><b><strong>First time here?<br>Have a look to the tutorial</strong></b>",
+  },
+  {title:'Interact with the map', html: 'You can interact directly with the on-screen map:<br>by <b><strong>clicking and dragging</strong></b> to navigate into the map,<br>by <b><strong>double-clicking</strong></b> or using your TouchPad in order to zoom/dezoom,<br>or by <b><strong>clicking</strong></b> on a spatial unit to get additionnal information about the selected place.<br><br><b><strong>Titles and legends</strong></b> of the on-screen map appear on the left-hand side of the screen. Menus that are available on the right-hand side are more precisely described in the next tab.',},
+  {title:'Choose the right map to visualize', html: 'Menus on the upper right corner allow you to <b><strong>switch to other maps</strong></b>. Three main elements allow you to navigate between the maps that are available.<br><br><b><strong>Dataset</strong></b> to switch to other kind of information.<br><b><strong>Study area</strong></b> to directly switch between available scales.<br><b><strong>Resolution level</strong></b> to directly switch to the same map using other kind of basic spatial units.<br><br>In many cases (according to the selected dataset), more elements are listed in the menu (for instance to make the number of communities vary when results of a community detection algorithm are displayed).<br><br>Next tab is about the Toolbox on the lower right corner of the screen.',},
+{title:'Get more information about the on-screen map', html: 'The lower right corner of the screen hosts the <b><strong>Toolbox</strong></b>, providing:<br><br>a button to get <b><strong>methodological comments</strong></b> about the map (for example the source of data),<br>a button to get some <b><strong>geographical comments</strong></b> about the map,<br>and a button to <b><strong>download the map</strong></b> (in .svg or .png).',},
+]).then((result) => {
+  if (result.value) {
+    Swal.fire({
+      title: 'That&apos;s it!',
+      html:
+        'At any time, you can go back to the homepage to read more about datasets used in the atlas, about the Louvain method (the community detection algorithm used to build the maps synthetizing interactions), to discover more about the team or to contact us. Simply click on the link in the header!<br><br><b><strong>Welcome on atlas.brussels!</strong></b>',
+      confirmButtonText: 'All done!'
+    })
+  }
+})		
+		
+		
+			
+		
+		
+		
+		var width = window.innerWidth, height = 80*(window.innerHeight)/100;
+		
+		window.addEventListener("resize", function() { 
+			svg.attr("width", window.innerWidth).attr("height", 80*(window.innerHeight)/100); 
+		});
+		
+		
+		
+		
+		
+			
+ 		
+		
+	
+		
+/* *******************************************************************
+***************************     JQUERY     ***************************
+******************************************************************* */
+
+		
+/* ***************** commun à l'ensemble des menus ********************* */		
+		$('.menuopen, .menulabel').on("click", function(){
+			$('.menuopen, .menulabel').css('display', 'none') ;
+		}) ;
+		
+		$('.menureduce').on("click", function(){
+			$('.menufull, .menureduce').css('display', 'none') ;
+			$('#menuAlabel, #menuAopen').css('display', 'block') ;
+		}) ;
+		
+		$('.buttonmenudataset, .buttonmenudatasetbis').on("click", function(){
+			$('.menufull, .menureduce').css('display', 'none') ;
+			$('#menuAlabel, #menuAopen').css('display', 'block') ;
+		}) ;
+		
+		$('.buttonmenudataset, .buttonmenudatasetbis').on("click", function(){
+			$('#menudatasetlabel, #menudatasetopen').css('display', 'block') ;
+		}) ;
+		
+		
+		
+		
+/* *******************  menu A ************************ */
+		
+		$('#menuAopen').on("click", function(){
+			$('#menuAfull, #menuAreduce').css('display', 'block');
+		}) ;
+		
+		$('#menuAreduce').on("click", function(){
+			$('#menudatasetopen, #menudatasetlabel').css('display', 'block') ;
+			$('#menuC1BBTYopen, #menuC1BBTYlabel').css('display', 'block') ;
+		}) ;
+		
+/* *******************  menus B ************************ */		
+			
+		$('#menudatasetopen').on("click", function(){
+			$('#menudatasetfull, #menudatasetreduce').css('display', 'block') ;
+		
+		
+		}) ;
+		
+		
+
+		$('#menudatasetreduce').on("click", function(){
+			$('#menudatasetopen, #menudatasetlabel').css('display', 'block') ;
+		}) ;
+		
+		
+		
+/* *******************  menus C1 ************************ */			
+		
+		$('#menuC1BBTYopen').on("click", function(){
+			$('#menuC1BBTYfull, #menuC1BBTYreduce').css('display', 'block') ;
+		}) ;
+		
+		$('#menuC1BBTYreduce').on("click", function(){
+			$('#menuC1BBTYfull').css('display', 'none') ;
+			$('#menudatasetopen, #menudatasetlabel').css('display', 'block') ;
+			$('#menuC1BBTYopen, #menuC1BBTYlabel').css('display', 'block') ;
+		}) ;
+		
+		$('#menuC1BBTZopen').on("click", function(){
+			$('#menuC1BBTZfull, #menuC1BBTZreduce').css('display', 'block') ;
+		}) ;
+		
+		$('#menuC1BBTZreduce').on("click", function(){
+			$('#menuC1BBTZfull').css('display', 'none') ;
+			$('#menudatasetopen, #menudatasetlabel').css('display', 'block') ;
+			$('#menuC1BBTZopen, #menuC1BBTZlabel').css('display', 'block') ;
+		}) ;
+		
+		$('#menuC1BBTAopen').on("click", function(){
+			$('#menuC1BBTAfull, #menuC1BBTAreduce').css('display', 'block') ;
+		}) ;
+		
+		$('#menuC1BBTAreduce').on("click", function(){
+			$('#menuC1BBTAfull').css('display', 'none') ;
+			$('#menudatasetopen, #menudatasetlabel').css('display', 'block') ;
+			$('#menuC1BBTAopen, #menuC1BBTAlabel').css('display', 'block') ;
+		}) ;
+		
+		$('#menuC1BBTBopen').on("click", function(){
+			$('#menuC1BBTBfull, #menuC1BBTBreduce').css('display', 'block') ;
+		}) ;
+		
+		$('#menuC1BBTBreduce').on("click", function(){
+			$('#menuC1BBTBfull').css('display', 'none') ;
+			$('#menudatasetopen, #menudatasetlabel').css('display', 'block') ;
+			$('#menuC1BBTBopen, #menuC1BBTBlabel').css('display', 'block') ;
+		}) ;
+		
+		$('#menuC1BBTCopen').on("click", function(){
+			$('#menuC1BBTCfull, #menuC1BBTCreduce').css('display', 'block') ;
+		}) ;
+		
+		$('#menuC1BBTCreduce').on("click", function(){
+			$('#menuC1BBTCfull').css('display', 'none') ;
+			$('#menudatasetopen, #menudatasetlabel').css('display', 'block') ;
+			$('#menuC1BBTCopen, #menuC1BBTClabel').css('display', 'block') ;
+		}) ;
+		
+		$('#menuC1BBTDopen').on("click", function(){
+			$('#menuC1BBTDfull, #menuC1BBTDreduce').css('display', 'block') ;
+		}) ;
+		
+		$('#menuC1BBTDreduce').on("click", function(){
+			$('#menuC1BBTDfull').css('display', 'none') ;
+			$('#menudatasetopen, #menudatasetlabel').css('display', 'block') ;
+			$('#menuC1BBTDopen, #menuC1BBTDlabel').css('display', 'block') ;
+		}) ;
+		
+		$('#menuC1BBTEopen').on("click", function(){
+			$('#menuC1BBTEfull, #menuC1BBTEreduce').css('display', 'block') ;
+		}) ;
+		
+		$('#menuC1BBTEreduce').on("click", function(){
+			$('#menuC1BBTEfull').css('display', 'none') ;
+			$('#menudatasetopen, #menudatasetlabel').css('display', 'block') ;
+			$('#menuC1BBTEopen, #menuC1BBTElabel').css('display', 'block') ;
+		}) ;
+		
+		$('#menuC1BBTFopen').on("click", function(){
+			$('#menuC1BBTFfull, #menuC1BBTFreduce').css('display', 'block') ;
+		}) ;
+		
+		$('#menuC1BBTFreduce').on("click", function(){
+			$('#menuC1BBTFfull').css('display', 'none') ;
+			$('#menudatasetopen, #menudatasetlabel').css('display', 'block') ;
+			$('#menuC1BBTFopen, #menuC1BBTFlabel').css('display', 'block') ;
+		}) ;	
+		
+		$('#menuC1BBTGopen').on("click", function(){
+			$('#menuC1BBTGfull, #menuC1BBTGreduce').css('display', 'block') ;
+		}) ;
+		
+		$('#menuC1BBTGreduce').on("click", function(){
+			$('#menuC1BBTGfull').css('display', 'none') ;
+			$('#menudatasetopen, #menudatasetlabel').css('display', 'block') ;
+			$('#menuC1BBTGopen, #menuC1BBTGlabel').css('display', 'block') ;
+		}) ;	
+		
+/* *******************  menus C2 ************************ */		
+		
+		$('#menuC2BGQBopen').on("click", function(){
+			$('#menuC2BGQBfull, #menuC2BGQBreduce').css('display', 'block') ;
+		}) ;
+		
+		$('#menuC2BGQBreduce').on("click", function(){
+			$('#menuC2BGQBfull').css('display', 'none') ;
+			$('#menuC2BGQBopen, #menuC2BGQBlabel').css('display', 'block') ;
+		}) ;
+		
+		$('#menuC2BGQCopen').on("click", function(){
+			$('#menuC2BGQCfull, #menuC2BGQCreduce').css('display', 'block') ;
+		}) ;
+		
+		$('#menuC2BGQCreduce').on("click", function(){
+			$('#menuC2BGQCfull').css('display', 'none') ;
+			$('#menuC2BGQCopen, #menuC2BGQClabel').css('display', 'block') ;
+		}) ;
+		
+		$('#menuC2BGQDopen').on("click", function(){
+			$('#menuC2BGQDfull, #menuC2BGQDreduce').css('display', 'block') ;
+		}) ;
+		
+		$('#menuC2BGQDreduce').on("click", function(){
+			$('#menuC2BGQDfull').css('display', 'none') ;
+			$('#menuC2BGQDopen, #menuC2BGQDlabel').css('display', 'block') ;
+		}) ;	
+		
+/* **************** boutons dans menu A ********************* */		
+
+		$('#buttonBBT').on("click", function(){
+			
+			$('.menulabel').css('display', 'none') ;
+			$('.menuopen').css('display', 'none') ;
+			
+			$('#menuAfull').css('display', 'none') ;
+			$('#menuAlabel, #menuAopen').css('display', 'block') ;
+			
+			$('#menudatasetopen, #menudatasetlabel').css('display', 'block') ;
+			$('#menuC1BBTYlabel, #menuC1BBTYopen').css('display', 'block') ;
+			
+			
+		}) ;
+		
+		$('#buttonBGQ').on("click", function(){
+			
+			$('.menulabel').css('display', 'none') ;
+			$('.menuopen').css('display', 'none') ;
+			
+			$('#menuAfull').css('display', 'none') ;
+			$('#menuAlabel, #menuAopen').css('display', 'block') ;
+			
+			
+		}) ;
+		
+/* **************** boutons dans menu B1BBT ********************* */
+		
+		$('#buttonB1BBTY').on("click", function(){
+			// population density
+			$('#menuC1BBTYopen, #menuC1BBTYlabel').css('display', 'block') ;
+		}) ;
+		
+		$('#buttonB1BBTZ').on("click", function(){
+			// built-up areas
+			$('#menuC1BBTZopen, #menuC1BBTZlabel').css('display', 'block') ;
+		}) ;
+		
+		$('#buttonB1BBTA').on("click", function(){
+			// admin
+			$('#menuC1BBTAopen, #menuC1BBTAlabel').css('display', 'block') ;
+		}) ;
+		
+		$('#buttonB1BBTB').on("click", function(){
+			// commuting
+			$('#menuC1BBTBopen, #menuC1BBTBlabel').css('display', 'block') ;
+		}) ;
+		
+		$('#buttonB1BBTC').on("click", function(){
+			// migration
+			$('#menuC1BBTCopen, #menuC1BBTClabel').css('display', 'block') ;
+		}) ;
+		
+		$('#buttonB1BBTD').on("click", function(){
+			// admin
+			$('#menuC1BBTDopen, #menuC1BBTDlabel').css('display', 'block') ;
+		}) ;
+		
+		$('#buttonB1BBTE').on("click", function(){
+			// commuting
+			$('#menuC1BBTEopen, #menuC1BBTElabel').css('display', 'block') ;
+		}) ;
+		
+		$('#buttonB1BBTF').on("click", function(){
+			// migration
+			$('#menuC1BBTFopen, #menuC1BBTFlabel').css('display', 'block') ;
+		}) ;	
+		
+		$('#buttonB1BBTG').on("click", function(){
+			// trucks
+			$('#menuC1BBTGopen, #menuC1BBTGlabel').css('display', 'block') ;
+		}) ;	
+		
+/* **************** boutons dans menu B2BGQ ********************* */
+		
+		$('#buttonB2BGQY').on("click", function(){
+			// population density 
+			$('#menuC2BGQYopen, #menuC2BGQYlabel').css('display', 'block') ;
+		}) ;
+		
+		$('#buttonB2BGQZ').on("click", function(){
+			// built-up areas
+			$('#menuC2BGQZopen, #menuC2BGQZlabel').css('display', 'block') ;
+		}) ;
+		
+		$('#buttonB2BGQA').on("click", function(){
+			// admin
+			$('#menuC2BGQAopen, #menuC2BGQAlabel').css('display', 'block') ;
+		}) ;
+		
+		$('#buttonB2BGQB').on("click", function(){
+			// admin
+			$('#menuC2BGQBopen, #menuC2BGQBlabel').css('display', 'block') ;
+		}) ;
+		
+		$('#buttonB2BGQC').on("click", function(){
+			// admin
+			$('#menuC2BGQCopen, #menuC2BGQClabel').css('display', 'block') ;
+		}) ;
+		
+		$('#buttonB2BGQD').on("click", function(){
+			// admin
+			$('#menuC2BGQDopen, #menuC2BGQDlabel').css('display', 'block') ;
+		}) ;
+		
+/* **************** boutons dans menus C1 BBT ********************* */		
+		
+		$('.buttonmenuC1BBTY, .buttonmenuC1BBTZ, .buttonmenuC1BBTA, .buttonmenuC1BBTB, .buttonmenuC1BBTC, .buttonmenuC1BBTD, .buttonmenuC1BBTE, .buttonmenuC1BBTF,  .buttonmenuC1BBTG').on("click", function(){
+			$('.menufull, .menureduce').css('display', 'none') ;
+			$('#menuAopen, #menuAlabel').css('display', 'block') ;
+			$('#menudatasetopen, #menudatasetlabel').css('display', 'block') ;
+		}) ;
+		
+		$('.buttonmenuC1BBTY').on("click", function(){
+			$('#menuC1BBTYopen, #menuC1BBTYlabel').css('display', 'block') ;
+		}) ;
+		
+		$('.buttonmenuC1BBTZ').on("click", function(){
+			$('#menuC1BBTZopen, #menuC1BBTZlabel').css('display', 'block') ;
+		}) ;
+		
+		$('.buttonmenuC1BBTA').on("click", function(){
+			$('#menuC1BBTAopen, #menuC1BBTAlabel').css('display', 'block') ;
+		}) ;
+		
+		$('.buttonmenuC1BBTB').on("click", function(){
+			$('#menuC1BBTBopen, #menuC1BBTBlabel').css('display', 'block') ;
+		}) ;
+		
+		$('.buttonmenuC1BBTC').on("click", function(){
+			$('#menuC1BBTCopen, #menuC1BBTClabel').css('display', 'block') ;
+		}) ;
+		
+		$('.buttonmenuC1BBTD').on("click", function(){
+			$('#menuC1BBTDopen, #menuC1BBTDlabel').css('display', 'block') ;
+		}) ;
+		
+		$('.buttonmenuC1BBTE').on("click", function(){
+			$('#menuC1BBTEopen, #menuC1BBTElabel').css('display', 'block') ;
+		}) ;
+		
+		$('.buttonmenuC1BBTF').on("click", function(){
+			$('#menuC1BBTFopen, #menuC1BBTFlabel').css('display', 'block') ;
+		}) ;
+		
+		$('.buttonmenuC1BBTG').on("click", function(){
+			$('#menuC1BBTGopen, #menuC1BBTGlabel').css('display', 'block') ;
+		}) ;
+		
+/* **************** boutons dans menus C2 BGQ ********************* */
+		
+		$('.buttonmenuC2BGQY, .buttonmenuC2BGQZ, .buttonmenuC2BGQA, .buttonmenuC2BGQB, .buttonmenuC2BGQC, .buttonmenuC2BGQD').on("click", function(){
+			$('.menufull, .menureduce').css('display', 'none') ;
+			$('#menuAopen, #menuAlabel').css('display', 'block') ;
+		}) ;
+		
+		$('.buttonmenuC2BGQY').on("click", function(){
+			$('#menuC2BGQYopen, #menuC2BGQYlabel').css('display', 'block') ;
+		}) ;
+		
+		$('.buttonmenuC2BGQZ').on("click", function(){
+			$('#menuC2BGQZopen, #menuC2BGQZlabel').css('display', 'block') ;
+		}) ;
+		
+		$('.buttonmenuC2BGQA').on("click", function(){
+			$('#menuC2BGQAopen, #menuC2BGQAlabel').css('display', 'block') ;
+		}) ;
+		
+		$('.buttonmenuC2BGQB').on("click", function(){
+			$('#menuC2BGQBopen, #menuC2BGQBlabel').css('display', 'block') ;
+		}) ;
+		
+		$('.buttonmenuC2BGQC').on("click", function(){
+			$('#menuC2BGQCopen, #menuC2BGQClabel').css('display', 'block') ;
+		}) ;
+		
+		$('.buttonmenuC2BGQD').on("click", function(){
+			$('#menuC2BGQDopen, #menuC2BGQDlabel').css('display', 'block') ;
+		}) ;
+		
+/* ***************** toolbox ********************* */		
+		
+		$('#outilBlogo').on("click", function(){
+			$('#outilBfull').css('display', 'block') ;
+			$('#outilBreduce').css('display', 'block') ;
+		}) ;
+		
+		$('#outilBreduce').on("click", function(){
+			$('#outilBfull').css('display', 'none') ;
+			$('#outilBreduce').css('display', 'none') ;
+		}) ;
+		
+		$('#outilBfull').on("click", function(){
+			$('#outilBfull').css('display', 'none') ;
+			$('#outilBreduce').css('display', 'none') ;
+		}) ;
+		
+		$('#outilClogo').on("click", function(){
+			$('#outilCfull').css('display', 'block') ;
+			$('#outilCreduce').css('display', 'block') ;
+		}) ;
+		
+		$('#outilCreduce').on("click", function(){
+			$('#outilCfull').css('display', 'none') ;
+			$('#outilCreduce').css('display', 'none') ;
+		}) ;
+		
+		$('#outilCfull').on("click", function(){
+			$('#outilCfull').css('display', 'none') ;
+			$('#outilCreduce').css('display', 'none') ;
+		}) ;
+		
+		$('#outilDlogo').on("click", function(){
+			$('#outilDfull').css('display', 'block') ;
+			$('#outilDreduce').css('display', 'block') ;
+		}) ;
+		
+		$('#outilDreduce').on("click", function(){
+			$('#outilDfull').css('display', 'none') ;
+			$('#outilDreduce').css('display', 'none') ;
+		}) ;
+		
+		$('#outilDfull').on("click", function(){
+			$('#outilDfull').css('display', 'none') ;
+			$('#outilDreduce').css('display', 'none') ;
+		}) ;
+		
+		$('#copyrightlogo').on("click", function(){
+			/*$('#copyrightfull').css('display', 'block') ;
+			$('#copyrightreduce').css('display', 'block') ;*/
+			
+						
+Swal.fire({
+  title:'How to cite, share, reuse<br>atlas.brussels?',
+  html:'<strong><b>To cite and share</b></strong><br><br>Please use the following reference:<br><br>Finance Olivier (2019). <i>atlas.brussels website</i> (beta version). Available online on https://atlas.brussels.<br><br><strong><b>To reuse downloaded images</b></strong><br><br><img src="ATLAS/images/creative-commons-by-nc-sa.png" width="50%"><br>Each map is downloadable (through the save as button) under the <a href=" + "https://creativecommons.org/licenses/by-nc-sa/2.0/be/deed.en" + " target=" + "_blank" + ">Creative Commons CC-BY-NC-SA 2.0 BE license</a>. This means you can share and adapt the material under the following terms: attribution (you must give appropriate credit to atlas.brussels), NonCommercial (you may not use the material for commercial purposes) and ShareAlike (if you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original).<br><br><strong><b>To reuse code</b></strong><br><br><img src="ATLAS/images/logo-GPL.png" width="50%"><br>Code created to generate atlas.brussels visualization tool is available under a <a href=" + "https://www.gnu.org/licenses/agpl-3.0.en.html" + "target=" + "_blank" +">GNU Affero General Public License (AGPL 3.0)</a>.'}
+)
+			
+			
+
+			
+			
+		}) ;
+		
+		$('#copyrightreduce').on("click", function(){
+			$('#copyrightfull').css('display', 'none') ;
+			$('#copyrightreduce').css('display', 'none') ;
+			$('#outilBfull').css('display', 'none') ;
+			$('#outilBreduce').css('display', 'none') ;
+			$('#outilCfull').css('display', 'none') ;
+			$('#outilCreduce').css('display', 'none') ;
+			$('#outilDfull').css('display', 'none') ;
+			$('#outilDreduce').css('display', 'none') ;
+		}) ;
+		
+		$('#copyrightfull').on("click", function(){
+			$('#copyrightfull').css('display', 'none') ;
+			$('#copyrightreduce').css('display', 'none') ;
+		}) ;
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		$("#shortcutA").off().on("click", function(d) {
+			$("#menudatasetfull, #menudatasetreduce").css("display", "block");
+		});
+		
+		$(".link2, .link2").off().on("click", function(d) {
+			$("#menudatasetfull, #menudatasetreduce").css("display", "none");
+		});
+		
+		
+/* *******************************************************************
+*********************    CREATION CARTE D3.JS    *********************
+******************************************************************* */		
+		
+		
+		
+		var center = [4.45, 50.53];
+		var scale, color, color3, chemindata, legendtext;
+		var formatComma = d3.format(",");
+		
+/* **************** définition projection ********************* */	
+
+	
+		var geocoProj = d3.geoConicConformal()	// type de projection
+			.scale(scale)			// échelle
+			.center(center)			// centre du svg
+			.translate([width/2,height/2])
+		;
+		
+		var path = d3.geoPath()
+			.projection(geocoProj);
+
+	
+/* **************** svg mapcontainer ********************* */	
+	
+		var svg = d3.select( "#mapcontainer" )
+			.append( "svg" )
+			.attr("width", width)
+			.attr("height", height)
+			.classed("svg-container", true)
+			.attr("viewBox", "0 0 950 755")
+			//.classed("svg-content-responsive", true)
+			.style("background-color", '#f8f8f8')
+			// couleur du fond de l'ensemble du svg
+			.style("border", "solid 1px black")	;
+			// contour de l'ensemble du svg
+		
+
+/* **************** tooltips ********************* */
+		
+		var infobox = svg.append("g");
+		var infobox2 = svg.append("g");
+		var infobox3 = svg.append("g");
+		
+		
+/* **************** appels des différentes layers ********************* */		
+// attention ordre détermine afficharge
+		
+		var g = svg.append("g");
+		
+		var BBTprovBBTtowersCALL = svg.append("g");
+		var BBTprovBBTtowersFILE = "ATLAS/GEOdata/BBTprovBBTadmin.json";
+		
+		var BBTlimitescommunautesCALL = svg.append("g");
+		var BBTlimitescommunautesFILE = "ATLAS/GEOdata/BGQtwitCOMlimits.json" ;
+		// pas de FILE car appelé dans autre .js
+		
+		//var BBTlimitescommunautesphoneCALL = svg.append("g");
+		// pas de FILE car appelé dans autre .js
+		
+		var BBTlimitegeneraleCALL = svg.append("g");
+		var BBTlimitegeneraleFILE = "ATLAS/GEOdata/BBTlimitegenerale.json";
+		
+		var BBTlimitegeneralecommphoneCALL = svg.append("g");
+		var BBTlimitegeneralecommphoneFILE = "ATLAS/GEOdata/BBTlimitegeneralecommphone.json";
+		
+		var BGQlimitegeneraleCALL = svg.append("g");
+		var BGQlimitegeneraleFILE = "ATLAS/GEOdata/BGQlimitegenerale.json";
+		
+		
+		
+		var BGQprovBGQcommCALL = svg.append("g");
+		var BGQprovBGQcommFILE = "ATLAS/GEOdata/BGQprovBGQcomm.json";
+		
+		var BBTcommBBTgridCALL = svg.append("g");
+		var BBTcommBBTgridFILE = "ATLAS/GEOdata/BBTcommBBTgrid.json";
+		
+		var BBTprovBBTgridCALL = svg.append("g");
+		var BBTprovBBTgridFILE = "ATLAS/GEOdata/BBTprovBBTgrid.json";
+		
+		var BBTcommBBTadminCALL = svg.append("g");
+		var BBTcommBBTadminFILE = "ATLAS/GEOdata/BBTcommBBTadmin.json";
+		
+		var BBTprovBBTadminCALL = svg.append("g");
+		var BBTprovBBTadminFILE = "ATLAS/GEOdata/BBTprovBBTadmin.json";
+		
+		var BGQirailSEGMCALL = svg.append("g");
+		var BGQirailSEGMFILE = "ATLAS/GEOdata/BGQirailSEGM.json";
+		
+		var BGQirailSTATCALL = svg.append("g");
+		var BGQirailSTATFILE = "ATLAS/GEOdata/BGQirailSTAT.json";	
+	
+		
+		
+/* **************** création de la carte - layer principale ********************* */
+		
+		function load(chemindata, BBTlimitescommunautesFILE, legendtext) {
+			
+		
+			d3.json(chemindata, function(error, map) {
+			
+			//suppression de la carte précédemment affichée
+				d3.selectAll(".currentmap").remove() ;
+				
+			// adaptation de la projection à l'écran	
+				geocoProj.fitExtent([[55,35],[1045,735]],map);
+			
+			// sélection de path, utilisation des données du json chargé
+				g.selectAll("path")
+					.data(map.features)
+					.enter()
+					.append("path")
+					.attr("d", path)
+					.style("stroke", "#fff")
+					.attr( "class", "currentmap")
+					// on associe les valeurs d'un attribut du json aux currentmap choisies précédemment
+					.style("fill", function(d) {
+						var value = d.properties.DATA;
+						if (value) {return color(value);}
+						else {return "white"}
+				  	}); 
+				
+				
+			// ajout d'informations dans l'infobox 1 
+				g.selectAll(".currentmap")
+					.on("mouseenter" /*"click"*/, function() { infobox.style("display", "none"); })
+  					.on("click" /* "mouseover" */ , function(d) {
+			
+						d3.selectAll("#outilAlogo, #outilBlogo, #outilClogo, #outilDlogo, .menuopen, .menufull, #shortcutA, #shortcutB, #shortcutC, #shortcutD, #shortcutsE, #shortcutsF, #shortcutsG, #shortcutsGbis, #shortcutslabelE, #shortcutslabelF, #shortcutslabelG").style("visibility", "hidden")
+					infobox.style("display", "block")
+							.html(
+							'<div><p style="font-family: Josefin Slab; font-size:1.4em;"><b>About selected<br>spatial unit</b> <br></p></div>' + '<div id="infobox1municipality"><p><b>Municipality:</b> ' + d.properties.NOMCOMEN +'</p></div>' + '<div id="infobox1population"><p><b>Population:</b> ' + formatComma(d.properties.POP2017) +' inhabitants</p></div>')
+							
+							.style("background", "#ffffff")
+					})
+					.on("mouseleave", function() { d3.selectAll("#outilAlogo, #outilBlogo, #outilClogo, #outilDlogo").style("visibility", "visible")
+						d3.selectAll(".menuopen").style("visibility", "visible")
+						d3.selectAll(".menufull").style("visibility", "visible")
+								   d3.selectAll("#shortcutA, #shortcutB, #shortcutC, #shortcutD").style("visibility", "visible")
+						d3.selectAll("#shortcutsE, #shortcutsF , #shortcutsG, #shortcutsGbis").style("visibility", "visible")
+						d3.selectAll("#shortcutslabelE, #shortcutslabelF , #shortcutslabelG").style("visibility", "visible")
+								   infobox.style("display", "none");})
+				;
+			   
+			// chargement de l'ensemble des autres layers
+				
+				
+			
+				d3.json(BBTprovBBTadminFILE, function(error, BBTprovBBTadminPROJ){
+					
+					geocoProj
+						.fitExtent([[55,35],[1045,735]],BBTprovBBTadminPROJ)
+					;
+					
+					BBTprovBBTadminCALL.selectAll("path")
+						.data(BBTprovBBTadminPROJ.features)
+						.enter()
+						.append("path")
+						.attr("d", path)
+						.style("fill", "none")
+						.style("stroke", "#222726")
+						.style("stroke-width", "1")
+						.attr( "class", "BBTprovBBTadmin")
+						//.attr("visibility", "hidden");
+				});
+				
+				d3.json(BBTcommBBTadminFILE, function(error, BBTcommBBTadminPROJ){
+					
+					geocoProj
+						.fitExtent([[55,35],[1045,735]],BBTcommBBTadminPROJ)
+					;
+					
+					BBTcommBBTadminCALL.selectAll("path")
+						.data(BBTcommBBTadminPROJ.features)
+						.enter()
+						.append("path")
+						.attr("d", path)
+						.style("fill", "none")
+						.style("stroke", "#555555")
+						.style("stroke-width", "0.3")
+						.attr( "class", "BBTcommBBTadmin")
+						//.attr("visibility", "hidden");
+				});
+				
+				
+				  
+				d3.json(BBTprovBBTgridFILE, function(error, BBTprovBBTgridPROJ){
+					
+					geocoProj
+						.fitExtent([[55,35],[1045,735]],BBTprovBBTgridPROJ)
+					;
+					
+					BBTprovBBTgridCALL.selectAll("path")
+						.data(BBTprovBBTgridPROJ.features)
+						.enter()
+						.append("path")
+						.attr("d", path)
+						.style("fill", "none")
+						.style("stroke", "#222726")
+						.style("stroke-width", "1")
+						.attr( "class", "BBTprovBBTgrid")
+						//.attr("visibility", "hidden");
+				});
+				
+				d3.json(BBTcommBBTgridFILE, function(error, BBTcommBBTgridPROJ){
+					geocoProj
+						.fitExtent([[55,35],[1045,735]],BBTcommBBTgridPROJ)
+					;
+					
+					BBTcommBBTgridCALL.selectAll("path")
+						.data(BBTcommBBTgridPROJ.features)
+						.enter()
+						.append("path")
+						.attr("d", path)
+						.style("fill", "none")
+						.style("stroke", "#F5F5F5")
+						.style("stroke-width", "0.6")
+						.attr( "class", "BBTcommBBTgrid")
+						//.attr("visibility", "hidden");
+				});
+				
+				d3.json(BBTprovBBTtowersFILE, function(error, BBTprovBBTtowersPROJ){
+					geocoProj
+						.fitExtent([[52,27],[1037,737]],BBTprovBBTtowersPROJ)
+					;
+					
+					BBTprovBBTtowersCALL.selectAll("path")
+						.data(BBTprovBBTtowersPROJ.features)
+						.enter()
+						.append("path")
+						.attr("d", path)
+						.style("fill", "none")
+						.style("stroke", "#222726")
+						.style("stroke-width", "1")
+						.attr( "class", "BBTprovBBTtowers")
+						.attr("display", "none");
+				});
+				
+				d3.json(BGQprovBGQcommFILE, function(error, BGQprovBGQcommPROJ){
+					
+					geocoProj
+						.fitExtent([[55,35],[1045,735]], BGQprovBGQcommPROJ) ;
+					
+					BGQprovBGQcommCALL.selectAll("path")
+						.data(BGQprovBGQcommPROJ.features)
+						.enter()
+						.append("path")
+						.attr("d", path)
+						.style("fill", "none")
+						.style("stroke", "#222726")
+						.style("stroke-width", "1")
+						.attr( "class", "BGQprovBGQcomm")
+						//.attr("visibility", "hidden");
+				});
+				
+				
+				
+				
+				d3.json(BBTlimitegeneraleFILE, function(error, BBTlimitegeneralePROJ){
+					
+					geocoProj
+						.fitExtent([[55,35],[1045,735]], BBTlimitegeneralePROJ) ;
+					
+					BBTlimitegeneraleCALL.selectAll("path")
+						.data(BBTlimitegeneralePROJ.features)
+						.enter()
+						.append("path")
+						.attr("d", path)
+					.attr("fill", "none")
+						.style("stroke", "#000000")
+						.style("stroke-width", "1.4")
+						.attr( "class", "BBTlimitegenerale")
+						//.attr("visibility", "hidden");
+				});
+				
+				d3.json(BBTlimitegeneralecommphoneFILE, function(error, BBTlimitegeneralecommphonePROJ){
+					
+					geocoProj
+						.fitExtent([[55,35],[1045,735]], BBTlimitegeneralecommphonePROJ) ;
+					
+					BBTlimitegeneralecommphoneCALL.selectAll("path")
+						.data(BBTlimitegeneralecommphonePROJ.features)
+						.enter()
+						.append("path")
+						.attr("d", path)
+					.attr("fill", "none")
+						.style("stroke", "#000000")
+						.style("stroke-width", "1.4")
+						.attr( "class", "BBTlimitegeneralecommphone")
+						//.attr("visibility", "hidden");
+				});
+				
+				d3.json(BGQlimitegeneraleFILE, function(error, BGQlimitegeneralePROJ){
+					
+					geocoProj
+						.fitExtent([[55,35],[1045,735]], BGQlimitegeneralePROJ) ;
+					
+					BGQlimitegeneraleCALL.selectAll("path")
+						.data(BGQlimitegeneralePROJ.features)
+						.enter()
+						.append("path")
+						.attr("d", path)
+					.attr("fill", "none")
+						.style("stroke", "#000000")
+						.style("stroke-width", "1.4")
+						.attr( "class", "BGQlimitegenerale")
+						//.attr("visibility", "hidden");
+				});
+				
+				
+				
+				d3.json(BGQirailSEGMFILE, function(error, BGQirailSEGMPROJ){
+					
+					geocoProj
+						.fitExtent([[10,54],[1015,712]], BGQirailSEGMPROJ) ;
+					
+					BGQirailSEGMCALL.selectAll("path")
+						.data(BGQirailSEGMPROJ.features)
+						.enter()
+						.append("path")
+						.attr("d", path)
+					.attr("fill", "none")
+					.style("stroke-dasharray", ("2, 2.5"))	
+					.style("stroke", function(x) {
+						var color3 = d3.scaleThreshold()
+						.domain([1,2,4,5,6,7,9,25])
+						.range([/*"red", "yellow", "blue", "green", "orange", "purple", "black", "gray"*/
+		
+						"#d8a591"/*orange*/,"#ddd6a5"/*jaune*/,"#9bb1e8"/*bleu*/,"#e8c4c5"/*rose pâle*/, "#9cc1a3"/*vert*/, "#d18b91"/*rouge*/, "#ae927a"/*hainaut*/, "#aaaaaa", "gray"/*non classifié = white mais segment basculé en gris*/ ]);
+						
+						
+		
+						
+						var DEST = x.properties.Dsc1_0_c8;
+						var ORIG = x.properties.Osc1_0_c8;
+						if (ORIG==DEST) {return color3(ORIG);}
+						
+						
+						else {return "gray"}
+						/* else à passer en commentaire pour supprimer lignes entre gares de communautés différentes */
+						
+						}
+					)
+					
+					
+						.style("stroke-width", "1.5")
+						.attr( "class", "BGQirailSEGM")
+						//.attr("visibility", "hidden");
+				});
+				
+				
+				
+				
+				
+	
+				d3.json(BGQirailSTATFILE, function(error, BGQirailSTATPROJ){
+					
+					geocoProj
+						.fitExtent([[10,54],[1015,712]], BGQirailSTATPROJ) ;
+					
+					BGQirailSTATCALL.selectAll("path")
+						.data(BGQirailSTATPROJ.features)
+						.enter()
+						.append("path")
+						.attr("d", path)
+						
+						
+						.attr("fill", function(x) {
+						
+							var color4 = d3.scaleThreshold()
+        								.domain([1,2,4,5,6,7,9,25])
+								.range([/*"red", "yellow", "blue", "green", "orange", "purple", "black", "gray"*/
+		
+								"#d8a591"/*orange*/,"#ddd6a5"/*jaune*/,"#9bb1e8"/*bleu*/,"#e8c4c5"/*rose pâle*/, "#9cc1a3"/*vert*/, "#d18b91"/*rouge*/, "#ae927a"/*hainaut*/, "#aaaaaa", "white"/*white (non classifié)*/ ]);
+		
+						
+						
+					
+						
+							var node = x.properties.sc1_0_c8;
+						
+								if (node) {return color4(node);}
+						
+						
+							else {return "red"}
+						
+						})
+						
+					.style("stroke", "white")
+					
+					
+						.attr( "class", "BGQirailSTAT")
+						//.attr("visibility", "hidden");
+					
+					.on("mouseover" /* "mouseover" */ , function(d) {
+						
+						d3.select(this)
+						.style("stroke", function(x){
+						
+							var color4 = d3.scaleThreshold()
+        								.domain([1,2,4,5,6,7,9,25])
+								.range([/*"red", "yellow", "blue", "green", "orange", "purple", "black", "gray"*/
+		
+								"#d8a591"/*orange*/,"#ddd6a5"/*jaune*/,"#9bb1e8"/*bleu*/,"#e8c4c5"/*rose pâle*/, "#9cc1a3"/*vert*/, "#d18b91"/*rouge*/, "#ae927a"/*hainaut*/, "#aaaaaa", "white"/*white (non classifié)*/ ]);
+		
+						
+						
+					
+						
+							var node = x.properties.sc1_0_c8;
+						
+								if (node) {return color4(node);}
+						
+						
+							else {return "red"}
+						
+						})
+						
+						d3.selectAll("#outilAlogo, #outilBlogo, #outilClogo, #outilDlogo, .menuopen, .menufull, #shortcutA, #shortcutB, #shortcutC, #shortcutD, #shortcutsE, #shortcutsF, #shortcutslabelE, #shortcutslabelF").style("visibility", "hidden")
+						
+						infobox3
+							 
+						
+						
+						.style("display", "block")
+								.html( 
+								'<p style="font-family: Josefin Slab; font-size:1.4em;"><b>Train station</b> <br></p>' +
+								'<p class ="explications">' + d.properties.stations_g +'</p>')
+								.style("background", "#ffffff");
+					})
+					
+					.on("mouseout", function() { 
+						
+						d3.select(this)
+						.style("stroke", "white")
+						
+						d3.selectAll("#outilAlogo, #outilBlogo, #outilClogo, #outilDlogo").style("visibility", "visible")
+						d3.selectAll(".menuopen").style("visibility", "visible")
+						d3.selectAll(".menufull").style("visibility", "visible")
+						d3.selectAll("#shortcutA, #shortcutB, #shortcutC, #shortcutD").style("visibility", "visible")
+						d3.selectAll("#shortcutsE, #shortcutsF, #shortcutsG").style("visibility", "visible")
+						d3.selectAll("#shortcutslabelE, #shortcutslabelF, #shortcutslabelG").style("visibility", "visible")
+						infobox3.style("display", "none");})
+						
+						
+					
+											
+				
+				});
+				
+				
+				
+			
+				
+					
+				
+				
+				d3.json(BBTlimitescommunautesFILE, function(error, BBTlimitescommunautesPROJ){
+					
+					geocoProj
+						.fitExtent([[55,35],[1045,735]], BBTlimitescommunautesPROJ) ;
+					
+					BBTlimitescommunautesCALL.selectAll("path")
+						.data(BBTlimitescommunautesPROJ.features)
+						.enter()
+						.append("path")
+						.attr("d", path)
+						.style("opacity", "0.5")
+						.style("fill", function(d) {
+							var value = d.properties.DATA;
+								if (value) {return color2(value);}
+								else {return "#ababab"}
+				  		})
+						.style("stroke", "#8D8D8D")
+						.style("stroke-width", "1.5")
+						.attr( "class", "BBTlimitescommunautes")
+						.on("mouseenter" /*"click"*/, function() { infobox2.style("display", "none")})
+  						.on("click" /* "mouseover" */ , function(d) {
+						
+						d3.selectAll("#outilAlogo, #outilBlogo, #outilClogo, #outilDlogo, .menuopen, .menufull, #shortcutA, #shortcutB, #shortcutC, #shortcutD, #shortcutsE, #shortcutsF, #shortcutslabelE, #shortcutslabelF").style("visibility", "hidden")
+							infobox2.style("display", "block")
+								.html( 
+								'<p style="font-family: Josefin Slab; font-size:1.4em;"><b>About selected<br>community</b> <br></p>' +
+								'<p class ="explications"><b>Flows from this community relative to interactions in the whole study area</b></p><p class ="explications" style="padding-left: 1vw;"><b>' + formatComma(d.properties.PROP1) + ' %</b> of emitted flows<br><b>' + formatComma(d.properties.PROP2) + ' %</b> when internal flows excluded</p>' + 
+								'<p class ="explications"><b>Flows to this community relative to interactions in the whole study area</b></b></p><p class ="explications" style="padding-left: 1vw;"><b>' + formatComma(d.properties.PROP3) + ' %</b> of received flows<br><b>' + formatComma(d.properties.PROP4) + ' %</b> when internal flows excluded</p>' + '<p class ="explications"><b>Proportion of internal interactions</p><p class ="explications" style="padding-left: 1vw;">' + formatComma(d.properties.PROP5) +' %</b> of all the interactions of the selected community</p>')
+								.style("background", "#ffffff");
+						})
+						/*.on("mouseleave", function() { 
+						d3.selectAll("#outilAlogo, #outilBlogo, #outilClogo, #outilDlogo").style("opacity", "0.4")
+						d3.selectAll("#shortcutA, #shortcutB, #shortcutC, #shortcutD").style("opacity", "0.85")
+						d3.selectAll("#shortcutsE, #shortcutsF").style("opacity", "0.45")
+						d3.selectAll("#shortcutslabelE, #shortcutslabelF").style("opacity", "1")
+						d3.selectAll(".menuopen").style("opacity", "0.85")
+						d3.selectAll(".menufull").style("opacity", "1")
+						infobox2.style("display", "none"); })
+					;*/
+					
+					
+					
+						.on("mouseleave", function() { d3.selectAll("#outilAlogo, #outilBlogo, #outilClogo, #outilDlogo").style("visibility", "visible")
+						d3.selectAll(".menuopen").style("visibility", "visible")
+						d3.selectAll(".menufull").style("visibility", "visible")
+						d3.selectAll("#shortcutA, #shortcutB, #shortcutC, #shortcutD").style("visibility", "visible")
+						d3.selectAll("#shortcutsE, #shortcutsF, #shortcutsG").style("visibility", "visible")
+						d3.selectAll("#shortcutslabelE, #shortcutslabelF, #shortcutslabelG").style("visibility", "visible")
+						infobox2.style("display", "none");})
+				;
+					
+					
+				});
+				
+				var infobox = d3.select("#mapcontainer")
+				.append("div")
+				.attr("class", "infobox")
+				;
+				
+				var infobox2 = d3.select("#mapcontainer")
+				.append("div")
+				.attr("class", "infobox2")
+				;
+					
+				var infobox3 = d3.select("#mapcontainer")
+				.append("div")
+				.attr("class", "infobox3")
+				;
+			});
+	
+	   
+
+			
+/* ***************************************************************************************************************
+*****************************************  réglages du zoom ******************************************************
+*************************************************************************************************************** */			
+			
+			var child = svg.append("g")
+			.append("BBTprovBBTtowersCALL").append("BBTprovBBTadminCALL").append("BBTcommBBTadminCALL")
+			.append("BGQprovBGQcommCALL").append("BBTprovBBTgridCALL").append("BBTcommBBTgridCALL")
+			.append("BBTlimitescommunautesCALL")//.append("BBTlimitescommunautesphoneCALL")
+			.append("BBTlimitegeneraleCALL").append("BBTlimitegeneralecommphoneCALL").append("BGQlimitegeneraleCALL").append("BGQirailSEGMCALL").append("BGQirailSTATCALL")
+			;
+			
+			var zoomextent = [0.5 , 16];
+			
+		
+			
+			var zoom_handler = d3.zoom()
+			.scaleExtent(zoomextent)
+			.on("zoom", function() {
+				g.attr("transform", d3.event.transform);
+				BBTprovBBTtowersCALL.attr("transform", d3.event.transform);
+				BBTprovBBTadminCALL.attr("transform", d3.event.transform);
+				BBTcommBBTadminCALL.attr("transform", d3.event.transform);
+				BGQprovBGQcommCALL.attr("transform", d3.event.transform);
+				BBTprovBBTgridCALL.attr("transform", d3.event.transform);
+				BBTcommBBTgridCALL.attr("transform", d3.event.transform);
+				BBTlimitescommunautesCALL.attr("transform", d3.event.transform);
+				//BBTlimitescommunautesphoneCALL.attr("transform", d3.event.transform);
+				BBTlimitegeneraleCALL.attr("transform", d3.event.transform);
+				BBTlimitegeneralecommphoneCALL.attr("transform", d3.event.transform);
+				BGQlimitegeneraleCALL.attr("transform", d3.event.transform);
+				BGQirailSEGMCALL.attr("transform", d3.event.transform);
+				
+			BGQirailSTATCALL.attr("transform", d3.event.transform);
+			})
+			;
+			
+			svg.call(zoom_handler);
+			
+			d3.select('#outilAlogo').on('click', function() {
+				zoom_handler.scaleBy(g, 1);
+				
+				g.call(zoom_handler);
+				
+			});
+			
+			
+		
+		
+		
+			
+			
+/* ***************************************************************************************************************
+***************************************  contenu de la légende ***************************************************
+*************************************************************************************************************** */
+			
+			d3.select('#legendecontainer').selectAll(".legend").remove();
+			
+			var legend = d3.select("#legendecontainer").append("svg")
+			.attr("class", "legend")
+			.selectAll("g")
+			.data(color.domain())
+			.enter().append("g")
+			.attr("transform", function(d, i) { return "translate(0," + i * (height)/40 + ")"; })
+			;
+		
+
+
+			legend.append("rect").attr("width", "1em")
+				.attr("height", "1em").style("fill", color);
+
+			legend.append("text")
+				.data(legendText).attr("x", "1.8em").attr("y", ".5em")
+				.attr("dy", ".35em").text(function(d) { return d; });
+		
+		};
+	
+		/*
+		$(document).ready(function() {
+      if (navigator.userAgent.match(/msie/i) ){
+        alert('I am an old fashioned Internet Explorer');
+      }
+   });
+		
+		*/
+		
+		$(document).ready(function() {     
+		$.getJSON('ATLAS/GEOdata/BBTdensJOBSsect.json', function (data) {
+    console.log(data);
+  });
+	});
+	
+		
+		
+		
+		
+		
+	</script>
+	
